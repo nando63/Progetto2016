@@ -6,11 +6,49 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Il mercato dell'auto - Cliente</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Fernando Oggiano">
+        <meta name="description" content="Cerca, trova, compra a prezzi di saldi">
     </head>
     <body>
-        <div>TODO write content</div>
+        <h1>La tua vetrina</h1>
+        <form action="cliente.html" method="post">
+        <table>
+            <tr>
+                <th></th>
+                <th>Marca</th>
+                <th>Modello</th>
+                <th>Motore</th>
+                <th>Prezzo</th>
+                <th></th>
+            </tr>
+            <tr>
+                <td><input type="radio" name="auto" value="1"/></td>
+                <td>Fiat</td>
+                <td>500</td>
+                <td>Benzina</td>
+                <td>€ 1500</td>
+            </tr>
+            <tr>
+                <td><input type="radio" name="auto" value="2"/></td>
+                <td>Ford</td>
+                <td>Fiesta</td>
+                <td>Benzina</td>
+                <td>€ 2000</td>
+            </tr>
+            <tr>
+                <td><input type="radio" name="auto" value="3"/></td>
+                <td>Volkswagen</td>
+                <td>Golf</td>
+                <td>Benzina</td>
+                <td>€ 3000</td>
+            </tr>
+            <tr>
+                <td colspan="5" align="center"><input type="submit" value="acquista" /></td>
+            </tr>
+        </table>
+        </form>
     </body>
 </html>

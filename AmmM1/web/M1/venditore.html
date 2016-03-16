@@ -6,11 +6,32 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Mercatino dell'usato - Login</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Fernando Oggiano">
+        <meta name="description" content="Cerca, trova, compra a prezzi di saldi">
     </head>
     <body>
-        <div>TODO write content</div>
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="descrizione.html">Descrizione</a></li>
+                    <li><a href="cliente.html">Cliente</a></li>
+                    <li><a href="venditore.html">Venditore</a></li>
+                </ul>
+            </nav>
+        </header>
+        <div>
+        <form method="post" action="#">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username"/>
+            <br/>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password"/>
+            <br/>
+            <input type="submit" value="Invia"/>
+        </form>
+        </div>
     </body>
 </html>

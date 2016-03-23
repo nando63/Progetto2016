@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Il mercato dell'auto - Venditore</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Fernando Oggiano">
+        <meta name="description" content="Cerca, trova, compra a prezzi di saldi">
+        <link href="style.css" type="text/css" rel="stylesheet" media="screen" />
+    </head>
+    <body>
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="descrizione.html">Descrizione</a></li>
+                    <li><a href="login.html">Login</a></li>
+                </ul>
+            </nav>
+        </header>
+        <div>
+        <form method="post" action="#">
+            <div>
+                <label for="modello">Marca e modello</label>
+                <input type="text" id="modello" name="modello"/>
+            </div>
+            <div>
+                <label for="foto">Foto</label>
+                <input type="text" id="foto" name="foto"/>
+            </div>
+            <div>
+                <label for="descrizione">Descrizione</label>
+                <textarea id="descrizione" name="descrizione" cols="60" rows="4">
+                    
+                </textarea>
+            </div>
+            <div>
+                <label for="prezzo">Prezzo</label>
+                <input type="number" id="prezzo" name="prezzo"/>
+            </div>
+            <div>
+                <label for="quantita">Quantità</label>
+                <input type="number" id="quantita" name="quantita"/>
+            </div>
+            <div>
+                <input type="submit" value="Invia"/>
+            </div>
+        </form>
+        </div>
+    </body>
+</html>

@@ -8,8 +8,126 @@ and open the template in the editor.
     Author     : studente
 */
 
-body{
-    background-color: #6ba7ba;
-    color: rgb(0,10,100);
+body {
+    background-color: #dfdfff;
+    color: rgb(0,40,90);
     font-family: "Advantage", Arial, serif;
+    margin: 10px;
+    padding: 0;
+}
+h1 {
+    border: 1px solid #007f00;
+    text-align: center;
+    background-color: #ffff90;
+}
+h2 {
+    background-color:black;
+    color:#dfdfff;
+}
+h3 {
+    background-color: #fff;
+    border-bottom: 1px dotted gray;
+}
+header {
+    height:30px;
+}
+a{
+    text-decoration: none;
+    color:#ef7000;
+}
+a:hover {
+    text-decoration: underline;
+    font-weight: bold;
+}
+nav ul {
+    margin:0;
+    padding: 0;
+}
+nav li {
+    float: left;
+    width: 25%;
+    display: inline;
+    text-align: center;
+}
+nav li {
+    border-bottom: 1px solid black;
+}
+nav li.checked {
+    border-bottom: none;
+}
+nav li span {
+    display: block;
+    padding: 5px 0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-top: 1px solid white;
+    border-left: 1px solid white;
+    border-right: 1px solid black;
+}
+nav li a {
+    display: block;
+    padding: 5px 0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid white;
+    background-color: #ddd;
+}
+form {
+    margin: 0 auto;
+    display: table;
+}
+form div{
+    margin: 5px 0;
+}
+input[type="text"],input[type="password"],input[type="number"],textarea {
+    border-top: 1px solid green;
+    border-left: 1px solid green;
+    border-bottom: 1px solid white;
+    border-right: 1px solid white;
+}
+input[type="submit"] {
+    text-shadow: 2px 2px gray;
+    font-weight: bold;
+    border: 1px solid green;
+    padding: 2px 7px;
+    font-size: 20px;
+}
+input[type="submit"]:active {
+    text-shadow: none;
+    padding:4px 5px 0px 9px;
+    vertical-align: top;
+}
+input:not([type="submit"]):focus, textarea:focus {
+    background-color: #dfffdf;
+}
+label {
+    width: 140px;
+    float: left;
+}
+div.submit {
+    text-align: center;
+    margin-top: 10px;
+}
+table {
+    margin: 0 auto;
+}
+tr {
+    height: 90px;
+}
+tr.intestazione {
+    height: auto;
+}
+th {
+    text-shadow: 2px 2px #ffff4f;
+}
+tr.rigapari {
+    background: lightcyan;
+}
+tr.rigadispari {
+    background: lightgray;
+}
+td.center {
+    text-align: center;
 }

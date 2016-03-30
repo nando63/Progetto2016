@@ -48,8 +48,6 @@ nav li {
     width: 25%;
     display: inline;
     text-align: center;
-}
-nav li {
     border-bottom: 1px solid black;
 }
 nav li.checked {
@@ -130,4 +128,65 @@ tr.rigadispari {
 }
 td.center {
     text-align: center;
+}
+td.modello {
+    font-weight: bold;
+    color: #5050a0;
+    font-size: 18px;
+    padding: 0 5px;
+}
+
+div#indice strong {
+    margin: 25px;
+    display: block;
+}
+div#indice {
+    float: left;
+    width: 15%;
+    height: 400px;
+}
+div#body {
+    float: left;
+    width: 85%;
+    height: 400px;
+    overflow: auto;
+}
+@media only screen and (max-width: 1023px) {
+    div#indice {
+        float: none;
+        width: 100%;
+        height: auto;
+    }
+    div#body {
+        float: none;
+        width: 100%;
+        height: auto;
+        overflow: auto;
+    }
+}
+@media only screen and (max-width: 480px) {
+    header {
+        height: auto;
+    }
+    nav li {
+        float: none;
+        width: 100%;
+        display: inline;
+        text-align: center;
+        border-bottom: none;
+    }
+    nav li.checked {
+        display:none;
+    }
+    nav li span {
+        display: block;
+        padding: 5px 0;
+        border: none;
+    }
+    nav li a {
+        display: block;
+        padding: 5px 0;
+        border: none;
+        background-color: #ddd;
+    }
 }

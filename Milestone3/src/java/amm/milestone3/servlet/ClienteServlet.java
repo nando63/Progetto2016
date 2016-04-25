@@ -40,7 +40,7 @@ public class ClienteServlet extends HttpServlet {
         if (session != null) {
             String userType = (String)session.getAttribute("userType");
             if (userType != null && userType.equals("c")) {
-                Integer id = (Integer)session.getAttribute("userId");
+                Integer id = Integer.parseInt(session.getAttribute("userId").toString());
                 Cliente c = ClienteFactory.getInstance().getClienteById(id);
                 request.setAttribute("cliente", c);
                 request.getRequestDispatcher("cliente.jsp").forward(request, response);

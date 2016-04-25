@@ -40,7 +40,7 @@ public class VenditoreServlet extends HttpServlet {
         if (session != null) {
             String userType = (String)session.getAttribute("userType");
             if (userType != null && userType.equals("v")) {
-                Integer id = (Integer)session.getAttribute("userId");
+                Integer id = Integer.parseInt(session.getAttribute("userId").toString());
                 Venditore v = VenditoreFactory.getInstance().getVenditoreById(id);
                 request.setAttribute("venditore", v);
                 request.getRequestDispatcher("venditore.jsp").forward(request, response);

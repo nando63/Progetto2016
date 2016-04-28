@@ -4,6 +4,7 @@
     Author     : Nando
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,14 +14,30 @@
         <h1>Venditore</h1>
         <div>
             <span>Bentornato ${venditore.getNome()}</span>
-            <form method="post" action="#">
+            <form method="post" action="autoinvendita.html">
                 <div>
-                    <label for="modello">Marca e modello</label>
+                    <label for="marca">Marca</label>
+                    <input type="text" id="marca" name="marca"/>
+                </div>
+                <div>
+                    <label for="modello">Modello</label>
                     <input type="text" id="modello" name="modello"/>
                 </div>
                 <div>
-                    <label for="foto">Foto</label>
-                    <input type="text" id="foto" name="foto"/>
+                    <label for="categoria">Categoria</label>
+                    <select name="categoria" id="categoria">
+                        <c:forEach var="categoria" items="${categorieAuto}">
+                            <option value="${categoria.getId()}">${categoria.getCategoria()}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+                <div>
+                    <label for="categoria">Carburante</label>
+                    <select name="carburante" id="carburante">
+                        <c:forEach var="carburante" items="${carburanti}">
+                            <option value="${carburante.getId()}">${carburante.getNome()}</option>
+                        </c:forEach>
+                    </select>
                 </div>
                 <div>
                     <label for="descrizione">Descrizione</label>

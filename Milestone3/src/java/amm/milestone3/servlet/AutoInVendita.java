@@ -5,12 +5,16 @@
  */
 package amm.milestone3.servlet;
 
-import amm.milestone3.Cliente;
+import amm.milestone3.Auto;
+import amm.milestone3.Carburante;
+import amm.milestone3.CarburanteFactory;
+import amm.milestone3.CategoriaAuto;
+import amm.milestone3.CategoriaAutoFactory;
+import amm.milestone3.Sessione;
 import amm.milestone3.Venditore;
-import amm.milestone3.ClienteFactory;
 import amm.milestone3.VenditoreFactory;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,8 +27,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Nando
  */
-@WebServlet(name = "Login", urlPatterns = {"/login.html"})
-public class Login extends HttpServlet {
+@WebServlet(name = "AutoInVendita", urlPatterns = {"/autoinvendita.html"})
+public class AutoInVendita extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,41 +41,21 @@ public class Login extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession(true);
-
-        if (request.getParameter("submit") != null) {
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
+        Venditore v = Sessione.getVenditore(request);
+        if (v != null) {
+            String marca = request.getParameter("marca");
+            String modello = request.getParameter("modello");
+            Auto auto = new Auto(marca,modello);
+            auto.setIdCategoria(Integer.parseInt(request.getParameter("categoria")));
+            auto.setIdCarburante(Integer.parseInt(request.getParameter("carburante")));
+            auto.setDescrizione(request.getParameter("descrizione"));
+            auto.setPrezzo(Integer.parseInt(request.getParameter("prezzo")));
             
-            List<Cliente> listaClienti = ClienteFactory.getInstance().getClienteList();
-            if (listaClienti != null) {
-                for (Cliente cliente : listaClienti) {
-                    if (cliente.getUsername().equals(username) && cliente.getPassword().equals(password)) {
-                        session.setAttribute("userType", "c");
-                        session.setAttribute("userId", cliente.getId().toString());
-                        request.setAttribute("cliente", cliente);
-                        request.getRequestDispatcher("cliente.html").forward(request, response);
-                        return;
-                    }
-                }
-            }
-            List<Venditore> listaVenditori = VenditoreFactory.getInstance().getVenditoreList();
-            if (listaVenditori != null) {
-                for (Venditore venditore : listaVenditori) {
-                    if (venditore.getUsername().equals(username) && venditore.getPassword().equals(password)) {
-                        session.setAttribute("userType", "v");
-                        session.setAttribute("userId", venditore.getId());
-                        request.setAttribute("venditore", venditore);
-                        request.getRequestDispatcher("venditore.html").forward(request, response);
-                        return;
-                    }
-                }
-            }
-            String msg = "Username o password non corretta";
-            request.setAttribute("messaggio", msg);
-            request.setAttribute("username", username);
+            request.setAttribute("venditore", v);
+            request.setAttribute("auto", auto);
+            request.getRequestDispatcher("confermaauto.jsp").forward(request, response);
         }
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+        request.getRequestDispatcher("non_autorizzato.jsp?page=venditore").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

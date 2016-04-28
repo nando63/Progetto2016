@@ -5,16 +5,17 @@
  */
 package amm.milestone3.servlet;
 
+import amm.milestone3.Auto;
+import amm.milestone3.AutoFactory;
 import amm.milestone3.Cliente;
-import amm.milestone3.ClienteFactory;
+import amm.milestone3.Sessione;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -34,18 +35,13 @@ public class ClienteServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        HttpSession session = request.getSession(false);
-        
-        if (session != null) {
-            String userType = (String)session.getAttribute("userType");
-            if (userType != null && userType.equals("c")) {
-                Integer id = Integer.parseInt(session.getAttribute("userId").toString());
-                Cliente c = ClienteFactory.getInstance().getClienteById(id);
-                request.setAttribute("cliente", c);
-                request.getRequestDispatcher("cliente.jsp").forward(request, response);
-                return;
-            }
+        Cliente c = Sessione.getCliente(request);
+        if (c != null) {
+            ArrayList<Auto> listAuto = AutoFactory.getInstance().getAutoList();
+            request.setAttribute("listAuto", listAuto);
+            request.setAttribute("cliente", c);
+            request.getRequestDispatcher("cliente.jsp").forward(request, response);
+            return;
         }
         request.getRequestDispatcher("non_autorizzato.jsp?page=cliente").forward(request, response);
     }

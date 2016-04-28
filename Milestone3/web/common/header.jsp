@@ -21,7 +21,14 @@
                 <li><a href="cliente.html">Cliente</a></li>
             </c:if>
             <c:if test="${param.page.equals('venditore')}">
-                 <li class="checked"><span>Venditore</span></li>
+                <li class="checked">
+                    <c:if test="${param.set != null}">
+                        <a href="venditore.html">Venditore</a>
+                    </c:if>
+                    <c:if test="${param.set == null}">
+                        <span>Venditore</span>
+                    </c:if>
+                </li>
             </c:if>
             <c:if test="${!param.page.equals('venditore')}">
                  <li><a href="venditore.html">Venditore</a></li>

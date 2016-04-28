@@ -5,17 +5,19 @@
  */
 package amm.milestone3.servlet;
 
-import amm.milestone3.Utente;
+import amm.milestone3.Carburante;
+import amm.milestone3.CarburanteFactory;
+import amm.milestone3.CategoriaAuto;
+import amm.milestone3.CategoriaAutoFactory;
+import amm.milestone3.Sessione;
 import amm.milestone3.Venditore;
-import amm.milestone3.VenditoreFactory;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -35,17 +37,15 @@ public class VenditoreServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        HttpSession session = request.getSession(false);
-        if (session != null) {
-            String userType = (String)session.getAttribute("userType");
-            if (userType != null && userType.equals("v")) {
-                Integer id = Integer.parseInt(session.getAttribute("userId").toString());
-                Venditore v = VenditoreFactory.getInstance().getVenditoreById(id);
-                request.setAttribute("venditore", v);
-                request.getRequestDispatcher("venditore.jsp").forward(request, response);
-                return;
-            }
+        Venditore v = Sessione.getVenditore(request);
+        if (v != null) {
+            request.setAttribute("venditore", v);
+            List<CategoriaAuto> listaCatAuto = CategoriaAutoFactory.getInstance().getCategoriaAutoList();
+            request.setAttribute("categorieAuto", listaCatAuto);
+            List<Carburante> listaCarburanti = CarburanteFactory.getInstance().getCarburanteList();
+            request.setAttribute("carburanti", listaCarburanti);
+            request.getRequestDispatcher("venditore.jsp").forward(request, response);
+            return;
         }
         request.getRequestDispatcher("non_autorizzato.jsp?page=venditore").forward(request, response);
     }

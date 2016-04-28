@@ -51,15 +51,6 @@ nav li {
 nav li.checked {
     border-bottom: none;
 }
-nav li span {
-    display: block;
-    padding: 5px 0;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-top: 1px solid white;
-    border-left: 1px solid white;
-    border-right: 1px solid black;
-}
 nav li a {
     display: block;
     padding: 5px 0;
@@ -69,6 +60,18 @@ nav li a {
     border-left: 1px solid black;
     border-right: 1px solid white;
     background-color: #ddd;
+}
+nav li span,nav li.checked a {
+    display: block;
+    padding: 5px 0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-top: 1px solid white;
+    border-left: 1px solid white;
+    border-right: 1px solid black;
+}
+nav li.checked a {
+    background: none;
 }
 form {
     margin: 0 auto;

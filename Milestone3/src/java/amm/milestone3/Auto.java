@@ -18,9 +18,16 @@ public class Auto {
     private String targa;
     private Integer idCarburante;
     private String descrizione;
-
+    private Integer prezzo;
+    private String image;
+    
     Auto(Integer id, String marca, String modello) {
         this.id = id;
+        this.marca = marca;
+        this.modello = modello;
+    }
+    public Auto(String marca, String modello) {
+        this.id = -1; // momentaneamente messo a -1
         this.marca = marca;
         this.modello = modello;
     }
@@ -148,6 +155,34 @@ public class Auto {
      */
     public void setIdCategoria(Integer idCategoria) {
         this.idCategoria = idCategoria;
+    }
+
+    /**
+     * @param prezzo the prezzo to set
+     */
+    public void setPrezzo(Integer prezzo) {
+        this.prezzo = prezzo;
+    }
+
+    /**
+     * @return the prezzo
+     */
+    public Integer getPrezzo() {
+        return prezzo;
+    }
+
+    /**
+     * @return the image
+     */
+    public String getImage() {
+        return image;
+    }
+
+    /**
+     * @param image the image to set
+     */
+    public void setImage(String image) {
+        this.image = image;
     }
     
     

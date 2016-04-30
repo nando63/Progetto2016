@@ -14,7 +14,7 @@ public class Auto {
     private Integer idCategoria;
     private String marca;
     private String modello;
-    private Integer annoFabbricazione;
+    private Integer annoImmatricolazione;
     private String targa;
     private Integer idCarburante;
     private String descrizione;
@@ -60,17 +60,17 @@ public class Auto {
     }
 
     /**
-     * @return the annoFabbricazione
+     * @return the annoImmatricolazione
      */
-    public Integer getAnnoFabbricazione() {
-        return annoFabbricazione;
+    public Integer getAnnoImmatricolazione() {
+        return annoImmatricolazione;
     }
 
     /**
-     * @param annoFabbricazione the annoFabbricazione to set
+     * @param annoFabbricazione the annoImmatricolazione to set
      */
-    public void setAnnoFabbricazione(Integer annoFabbricazione) {
-        this.annoFabbricazione = annoFabbricazione;
+    public void setAnnoImmatricolazione(Integer annoImmatricolazione) {
+        this.annoImmatricolazione = annoImmatricolazione;
     }
 
     /**

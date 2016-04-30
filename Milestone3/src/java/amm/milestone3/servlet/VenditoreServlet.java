@@ -44,10 +44,8 @@ public class VenditoreServlet extends HttpServlet {
             request.setAttribute("categorieAuto", listaCatAuto);
             List<Carburante> listaCarburanti = CarburanteFactory.getInstance().getCarburanteList();
             request.setAttribute("carburanti", listaCarburanti);
-            request.getRequestDispatcher("venditore.jsp").forward(request, response);
-            return;
         }
-        request.getRequestDispatcher("non_autorizzato.jsp?page=venditore").forward(request, response);
+        request.getRequestDispatcher("venditore.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

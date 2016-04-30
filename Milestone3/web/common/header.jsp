@@ -15,10 +15,17 @@
                 <li><a href="login.html">Login</a></li>
             </c:if>
             <c:if test="${param.page.equals('cliente')}">
-                <li class="checked"><span>Cliente</span></li>
+                <li class="checked">
+                    <c:if test="${param.set != null}">
+                        <a href="cliente.html">Cliente</a>
+                    </c:if>
+                    <c:if test="${param.set == null}">
+                        <span>Cliente</span>
+                    </c:if>
+                </li>
             </c:if>
             <c:if test="${!param.page.equals('cliente')}">
-                <li><a href="cliente.html">Cliente</a></li>
+                 <li><a href="cliente.html">Cliente</a></li>
             </c:if>
             <c:if test="${param.page.equals('venditore')}">
                 <li class="checked">

@@ -10,8 +10,11 @@ package amm.milestone3;
  * @author Nando
  */
 public class Saldo {
-    private Integer id;
     private Double saldo;
+
+    Saldo(Double saldo) {
+        this.saldo = saldo;
+    }
 
     /**
      * @return the saldo
@@ -25,19 +28,5 @@ public class Saldo {
      */
     public void setSaldo(Double saldo) {
         this.saldo = saldo;
-    }
-
-    /**
-     * @return the id
-     */
-    public Integer getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Integer id) {
-        this.id = id;
     }
 }

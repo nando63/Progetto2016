@@ -12,33 +12,46 @@
     <body>
         <jsp:include page="common/header.jsp?page=venditore&set=true"/>
         <h1>Auto in vendita</h1>
-        <div>
-            <form method="post" action="autoinvendita.html">
+        <c:if test="${venditore == null}">
+            <span>Accesso non autorizzato</span>
+        </c:if>
+        <c:if test="${venditore != null}">
+            <div id="autoinvendita">
                 <div>
-                    <label>Marca</label>
-                    <input type="text" value="${auto.getMarca()}"/>
+                    <span>La tua auto è stata messa in vendita</span>
                 </div>
-                <div>
-                    <label>Modello</label>
-                    <input type="text" value="${auto.getModello()}"/>
+                <div id="riepilogo">
+                    <div>riepilogo:</div>
+                    <div>
+                        <label>Marca</label>
+                        <input disabled type="text" value="${auto.getMarca()}"/>
+                    </div>
+                    <div>
+                        <label>Modello</label>
+                        <input disabled type="text" value="${auto.getModello()}"/>
+                    </div>
+                    <div>
+                        <label>Anno immatricolazione</label>
+                        <input disabled type="text" value="${auto.getAnnoImmatricolazione()}"/>
+                    </div>
+                    <div>
+                        <label>Categoria</label>
+                        <input disabled type="text" value="${auto.getCategoria()}"/>
+                    </div>
+                    <div>
+                        <label>Carburante</label>
+                        <input disabled type="text" value="${auto.getCarburante()}"/>
+                    </div>
+                    <div>
+                        <label>Descrizione</label>
+                        <textarea disabled cols="40" rows="4">${auto.getDescrizione()}</textarea>
+                    </div>
+                    <div>
+                        <label>Prezzo</label>
+                        <input disabled type="text" value="${auto.getPrezzo()}"/>
+                    </div>
                 </div>
-                <div>
-                    <label>Categoria</label>
-                    <input type="text" value="${auto.getCategoria()}"/>
-                </div>
-                <div>
-                    <label>Carburante</label>
-                    <input type="text" value="${auto.getCarburante()}"/>
-                </div>
-                <div>
-                    <label>Descrizione</label>
-                    <textarea cols="40" rows="4">${auto.getDescrizione()}</textarea>
-                </div>
-                <div>
-                    <label>Prezzo</label>
-                    <input type="text" value="${auto.getPrezzo()}"/>
-                </div>
-            </form>
-        </div>
+            </div>
+        </c:if>
     </body>
 </html>

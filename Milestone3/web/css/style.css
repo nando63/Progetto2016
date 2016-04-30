@@ -14,7 +14,7 @@ body {
 h1 {
     border: 1px solid #007f00;
     text-align: center;
-    background-color: #ffff90;
+    background-color: #DADA8D;
 }
 h2 {
     background-color:black;
@@ -80,7 +80,7 @@ form {
 form div{
     margin: 5px 0;
 }
-input[type="text"],input[type="password"],input[type="number"],textarea {
+input[type="text"],input[type="password"],input[type="number"],textarea,select {
     border-top: 1px solid green;
     border-left: 1px solid green;
     border-bottom: 1px solid white;
@@ -98,11 +98,14 @@ input[type="submit"]:active {
     padding:4px 5px 0px 9px;
     vertical-align: top;
 }
+input[type="submit"]:hover {
+    background: yellow;
+}
 input:not([type="submit"]):focus, textarea:focus {
     background-color: #dfffdf;
 }
 label {
-    width: 140px;
+    width: 11em;
     float: left;
 }
 div.submit {
@@ -136,6 +139,10 @@ td.modello {
     font-size: 18px;
     padding: 0 5px;
 }
+td.aggiungi {
+    width: 10em;
+    text-align: center;
+}
 
 div#indice strong {
     margin: 25px;
@@ -163,6 +170,30 @@ div.errore span {
     text-align:center;
     font-size:80%;
     padding: 1em 0;
+}
+div#carrello, div#autoinvendita, div#confermaacquisto {
+    display: table;
+    margin: 0 auto;
+}
+div#carrello div {
+    margin-bottom: 10px;
+}
+div#carrello label {
+    width: 12em;
+    height: 100%;
+    vertical-align: middle;
+}
+div#carrello .immagine {
+    text-align: center;
+}
+div#carrello img {
+    border-top: green 1px solid;
+    border-left: green 1px solid;
+    border-right: white 1px solid;
+    border-bottom: white 1px solid;
+}
+div#riepilogo {
+    margin-top: 10px;
 }
 @media only screen and (max-width: 1023px) {
     div#indice {

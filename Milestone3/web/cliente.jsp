@@ -12,32 +12,47 @@
     <body>
         <jsp:include page="common/header.jsp?page=cliente"/>
         <h1>La tua vetrina</h1>
-        <div id="tabclient">
-            <span>Bentornato ${cliente.getNome()}</span>
-            <table>
-                <tr class="intestazione">
-                    <th>Marca e modello</th>
-                    <th>Immagine</th>
-                    <th>Anno</th>
-                    <th>Descrizione</th>
-                    <th>Prezzo</th>
-                    <th></th>
-                </tr>
-                <c:forEach var="auto" items="${listAuto}">
-                    <c:if test="${auto.getImage() != null}">
-                        <tr class="rigadispari">
-                            <td class="modello">${auto.getMarca()} ${auto.getModello()}</td>
-                            <td>
-                                <img width="100" src="${auto.getImage()}" alt="${auto.getMarca()} ${auto.getModello()}" title="${auto.getMarca()} ${auto.getModello()}"/>
-                            </td>
-                            <td class="center">${auto.getAnnoFabbricazione()}</td>
-                            <td>${auto.getDescrizione()}</td>
-                            <td>€ ${auto.getPrezzo()}</td>
-                            <td><a href="cliente.html?id=${auto.getId()}">Aggiungi al carrello</a></td>
-                        </tr>
-                    </c:if>
-                </c:forEach>
-            </table>
-        </div>
+        <c:if test="${cliente == null}">
+            <span>Accesso non autorizzato</span>
+        </c:if>
+        <c:if test="${cliente != null}">
+            <div id="tabclient">
+                <span>Cliente: ${cliente.getNome()}</span>
+                <br/>
+                <span>saldo: € ${cliente.getSaldo()}</span>
+                <table>
+                    <tr class="intestazione">
+                        <th>Marca e modello</th>
+                        <th>Immagine</th>
+                        <th>Anno immatricolazione</th>
+                        <th>Descrizione</th>
+                        <th>Prezzo</th>
+                        <th></th>
+                    </tr>
+                    <c:set var="i" value="1"/>
+                    <c:forEach var="auto" items="${listAuto}">
+                        <c:if test="${auto.getImage() != null}">
+                            <c:if test="${i == 1}">
+                                <c:set var="riga" value="rigadispari"/>
+                            </c:if>
+                            <c:if test="${i == 0}">
+                                <c:set var="riga" value="rigapari"/>
+                            </c:if>
+                            <c:set var="i" value="${1 - i}"/>
+                            <tr class="${riga}">
+                                <td class="modello">${auto.getMarca()} ${auto.getModello()}</td>
+                                <td>
+                                    <img width="100" src="${auto.getImage()}" alt="${auto.getMarca()} ${auto.getModello()}" title="${auto.getMarca()} ${auto.getModello()}"/>
+                                </td>
+                                <td class="center">${auto.getAnnoImmatricolazione()}</td>
+                                <td>${auto.getDescrizione()}</td>
+                                <td class="center">€ ${auto.getPrezzo()}</td>
+                                <td class="aggiungi"><a href="carrello.html?id=${auto.getId()}">Aggiungi al carrello</a></td>
+                            </tr>
+                        </c:if>
+                    </c:forEach>
+                </table>
+            </div>
+        </c:if>
     </body>
 </html>

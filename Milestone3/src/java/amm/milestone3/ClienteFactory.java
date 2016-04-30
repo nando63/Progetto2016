@@ -33,6 +33,7 @@ public class ClienteFactory {
         cliente1.setCodiceFiscale("GGHWWT83G32H645G");
         cliente1.setUsername("cli1");
         cliente1.setPassword("pwd1");
+        cliente1.setSaldo(5000.0);
         listaClienti.add(cliente1);
 
         Cliente cliente2 = new Cliente();
@@ -42,6 +43,7 @@ public class ClienteFactory {
         cliente2.setCodiceFiscale("FNEGNN62A11B354O");
         cliente2.setUsername("cli2");
         cliente2.setPassword("pwd2");
+        cliente2.setSaldo(15000.0);
         listaClienti.add(cliente2);
 
         Cliente cliente3 = new Cliente();
@@ -51,6 +53,7 @@ public class ClienteFactory {
         cliente3.setCodiceFiscale("TZRABR77G01T555H");
         cliente3.setUsername("cli3");
         cliente3.setPassword("pwd3");
+        cliente3.setSaldo(7500.0);
         listaClienti.add(cliente3);
     }
     public ArrayList<Cliente> getClienteList() {

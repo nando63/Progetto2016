@@ -28,7 +28,7 @@ public class AutoFactory {
         auto = new Auto(1,"FIAT","Panda");
         auto.setIdCategoria(1);
         auto.setIdCarburante(1);
-        auto.setAnnoFabbricazione(1995);
+        auto.setAnnoImmatricolazione(1995);
         auto.setTarga("GF635FD");
         auto.setDescrizione("Modello semi nuovo");
         auto.setPrezzo(2050);
@@ -37,7 +37,7 @@ public class AutoFactory {
         auto = new Auto(2,"Renault","Twingo");
         auto.setIdCategoria(1);
         auto.setIdCarburante(1);
-        auto.setAnnoFabbricazione(2001);
+        auto.setAnnoImmatricolazione(2001);
         auto.setTarga("TT636HH");
         auto.setDescrizione("Incidentata");
         auto.setPrezzo(1900);
@@ -46,7 +46,7 @@ public class AutoFactory {
         auto = new Auto(3,"Opel","Aygo");
         auto.setIdCategoria(1);
         auto.setIdCarburante(1);
-        auto.setAnnoFabbricazione(2011);
+        auto.setAnnoImmatricolazione(2011);
         auto.setTarga("GT453DD");
         auto.setDescrizione("Nuova");
         auto.setPrezzo(4500);
@@ -55,7 +55,7 @@ public class AutoFactory {
         auto = new Auto(4,"Fiat","Panda");
         auto.setIdCategoria(1);
         auto.setIdCarburante(2);
-        auto.setAnnoFabbricazione(1999);
+        auto.setAnnoImmatricolazione(1999);
         auto.setTarga("AA998GB");
         auto.setDescrizione("Molto vecchia");
         auto.setPrezzo(1500);
@@ -65,7 +65,7 @@ public class AutoFactory {
         auto.setIdCategoria(1);
         auto.setIdCarburante(2);
         auto.setImage("images/image4.jpg");
-        auto.setAnnoFabbricazione(2003);
+        auto.setAnnoImmatricolazione(2003);
         auto.setTarga("AF884HH");
         auto.setDescrizione("Occasione");
         auto.setPrezzo(3100);
@@ -74,7 +74,7 @@ public class AutoFactory {
         auto = new Auto(6,"Renault","Clio");
         auto.setIdCategoria(1);
         auto.setIdCarburante(2);
-        auto.setAnnoFabbricazione(2004);
+        auto.setAnnoImmatricolazione(2004);
         auto.setTarga("BA998LL");
         auto.setDescrizione("Di terza mano");
         auto.setPrezzo(1100);
@@ -83,7 +83,7 @@ public class AutoFactory {
         auto = new Auto(7,"Opel","Adam");
         auto.setIdCategoria(1);
         auto.setIdCarburante(2);
-        auto.setAnnoFabbricazione(2011);
+        auto.setAnnoImmatricolazione(2011);
         auto.setTarga("EA888JU");
         auto.setDescrizione("Chilometri zero");
         auto.setPrezzo(8000);
@@ -93,7 +93,7 @@ public class AutoFactory {
         auto.setIdCategoria(1);
         auto.setIdCarburante(3);
         auto.setImage("images/image5.jpg");
-        auto.setAnnoFabbricazione(2006);
+        auto.setAnnoImmatricolazione(2006);
         auto.setTarga("CZ897HL");
         auto.setDescrizione("Con fendinebbia");
         auto.setPrezzo(900);
@@ -102,7 +102,7 @@ public class AutoFactory {
         auto = new Auto(9,"Peugeot","106");
         auto.setIdCategoria(1);
         auto.setIdCarburante(3);
-        auto.setAnnoFabbricazione(2000);
+        auto.setAnnoImmatricolazione(2000);
         auto.setTarga("HY637XX");
         auto.setDescrizione("Cambio automatico");
         auto.setPrezzo(1700);
@@ -112,7 +112,7 @@ public class AutoFactory {
         auto.setIdCategoria(2);
         auto.setIdCarburante(1);
         auto.setImage("images/image1.jpg");
-        auto.setAnnoFabbricazione(2012);
+        auto.setAnnoImmatricolazione(2012);
         auto.setTarga("EE777FR");
         auto.setDescrizione("Piccola");
         auto.setPrezzo(4400);
@@ -121,7 +121,7 @@ public class AutoFactory {
         auto = new Auto(11,"Renault","Clio");
         auto.setIdCategoria(2);
         auto.setIdCarburante(1);
-        auto.setAnnoFabbricazione(2010);
+        auto.setAnnoImmatricolazione(2010);
         auto.setTarga("DE536GG");
         auto.setDescrizione("Tetto apribile");
         auto.setPrezzo(5100);
@@ -131,7 +131,7 @@ public class AutoFactory {
         auto.setIdCategoria(2);
         auto.setIdCarburante(2);
         auto.setImage("images/image2.jpg");
-        auto.setAnnoFabbricazione(2010);
+        auto.setAnnoImmatricolazione(2010);
         auto.setTarga("AA000AA");
         auto.setDescrizione("Tetto apribile");
         auto.setPrezzo(2100);
@@ -140,7 +140,7 @@ public class AutoFactory {
         auto = new Auto(13,"Volkswagen","Polo");
         auto.setIdCategoria(2);
         auto.setIdCarburante(2);
-        auto.setAnnoFabbricazione(2014);
+        auto.setAnnoImmatricolazione(2014);
         auto.setTarga("ER432TK");
         auto.setDescrizione("Bicolore");
         auto.setPrezzo(4100);
@@ -149,7 +149,7 @@ public class AutoFactory {
         auto = new Auto(14,"Peugeot","407");
         auto.setIdCategoria(2);
         auto.setIdCarburante(3);
-        auto.setAnnoFabbricazione(2015);
+        auto.setAnnoImmatricolazione(2015);
         auto.setTarga("FA378JJ");
         auto.setDescrizione("Da rottamare");
         auto.setPrezzo(200);
@@ -158,17 +158,17 @@ public class AutoFactory {
         auto = new Auto(15,"Citroen","C2");
         auto.setIdCategoria(2);
         auto.setIdCarburante(3);
-        auto.setAnnoFabbricazione(2011);
+        auto.setAnnoImmatricolazione(2011);
         auto.setTarga("CD436HH");
         auto.setDescrizione("Cerchi in lega");
         auto.setPrezzo(3500);
         listaAuto.add(auto);
 
-        auto = new Auto(16,"Volksvagen","Golf");
+        auto = new Auto(16,"Volkswagen","Golf");
         auto.setIdCategoria(3);
         auto.setIdCarburante(1);
         auto.setImage("images/image3.jpg");
-        auto.setAnnoFabbricazione(2011);
+        auto.setAnnoImmatricolazione(2011);
         auto.setTarga("KI220KO");
         auto.setDescrizione("Cerchi in lega");
         auto.setPrezzo(5500);

@@ -12,16 +12,13 @@ import amm.milestone3.CategoriaAuto;
 import amm.milestone3.CategoriaAutoFactory;
 import amm.milestone3.Sessione;
 import amm.milestone3.Venditore;
-import amm.milestone3.VenditoreFactory;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -49,13 +46,33 @@ public class AutoInVendita extends HttpServlet {
             auto.setIdCategoria(Integer.parseInt(request.getParameter("categoria")));
             auto.setIdCarburante(Integer.parseInt(request.getParameter("carburante")));
             auto.setDescrizione(request.getParameter("descrizione"));
-            auto.setPrezzo(Integer.parseInt(request.getParameter("prezzo")));
+            String prezzo = request.getParameter("prezzo");
+            if (prezzo != null && prezzo.length() > 0)
+                auto.setPrezzo(Integer.parseInt(prezzo));
+            String anno = request.getParameter("anno");
+            if (anno != null && anno.length() > 0)
+                auto.setAnnoImmatricolazione(Integer.parseInt(anno));
             
             request.setAttribute("venditore", v);
             request.setAttribute("auto", auto);
-            request.getRequestDispatcher("confermaauto.jsp").forward(request, response);
+            if (marca.length() == 0 || modello.length() == 0) {
+                String msg = "";
+                if (marca.length() == 0)
+                    msg = "Devi inserire la marca";
+                if (modello.length() == 0) {
+                    if (!msg.equals("")) msg += "<br/>";
+                    msg += "Devi inserire il modello";
+                }
+                request.setAttribute("messaggio", msg);
+                List<CategoriaAuto> listaCatAuto = CategoriaAutoFactory.getInstance().getCategoriaAutoList();
+                request.setAttribute("categorieAuto", listaCatAuto);
+                List<Carburante> listaCarburanti = CarburanteFactory.getInstance().getCarburanteList();
+                request.setAttribute("carburanti", listaCarburanti);
+                request.getRequestDispatcher("venditore.jsp").forward(request, response);
+                return;
+            }
         }
-        request.getRequestDispatcher("non_autorizzato.jsp?page=venditore").forward(request, response);
+        request.getRequestDispatcher("confermaauto.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

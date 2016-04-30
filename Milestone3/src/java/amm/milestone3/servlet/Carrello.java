@@ -10,7 +10,7 @@ import amm.milestone3.AutoFactory;
 import amm.milestone3.Cliente;
 import amm.milestone3.Sessione;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,8 +21,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Nando
  */
-@WebServlet(name = "Cliente", urlPatterns = {"/cliente.html"})
-public class ClienteServlet extends HttpServlet {
+@WebServlet(name = "Carrello", urlPatterns = {"/carrello.html"})
+public class Carrello extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,13 +35,16 @@ public class ClienteServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Cliente c = Sessione.getCliente(request);
-        if (c != null) {
-            ArrayList<Auto> listaAuto = AutoFactory.getInstance().getAutoList();
-            request.setAttribute("listAuto", listaAuto);
-            request.setAttribute("cliente", c);
+        String idAuto = request.getParameter("id");
+        if (idAuto != null) {
+            Cliente c = Sessione.getCliente(request);
+            if (c != null) {
+                Auto auto = AutoFactory.getInstance().getAutoById(Integer.parseInt(idAuto));
+                request.setAttribute("auto", auto);
+                request.setAttribute("cliente", c);
+            }
         }
-        request.getRequestDispatcher("cliente.jsp").forward(request, response);
+        request.getRequestDispatcher("carrello.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

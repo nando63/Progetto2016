@@ -1,11 +1,6 @@
-<%-- 
-    Document   : venditore
-    Created on : 23-apr-2016, 16.49.28
-    Author     : Nando
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
 <!DOCTYPE html>
 <html>
     <jsp:include page="common/head.jsp?title=Venditore"/>
@@ -53,5 +48,6 @@
                 </div>
             </div>
         </c:if>
+        <jsp:include page="common/footer.jsp"/>
     </body>
 </html>

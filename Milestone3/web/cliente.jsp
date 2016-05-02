@@ -1,11 +1,6 @@
-<%-- 
-    Document   : cliente
-    Created on : 23-apr-2016, 16.48.23
-    Author     : Nando
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
 <!DOCTYPE html>
 <html>
     <jsp:include page="common/head.jsp?title=Cliente"/>
@@ -40,7 +35,7 @@
                             </c:if>
                             <c:set var="i" value="${1 - i}"/>
                             <tr class="${riga}">
-                                <td class="modello">${auto.getMarca()} ${auto.getModello()}</td>
+                                <td class="modello">${auto.getMarca()}&nbsp;${auto.getModello()}</td>
                                 <td>
                                     <img width="100" src="${auto.getImage()}" alt="${auto.getMarca()} ${auto.getModello()}" title="${auto.getMarca()} ${auto.getModello()}"/>
                                 </td>
@@ -54,5 +49,6 @@
                 </table>
             </div>
         </c:if>
+        <jsp:include page="common/footer.jsp"/>
     </body>
 </html>

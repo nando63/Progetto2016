@@ -1,11 +1,6 @@
-<%-- 
-    Document   : carrello.jsp
-    Created on : 29-apr-2016, 19.16.33
-    Author     : Nando
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
 <!DOCTYPE html>
 <html>
     <jsp:include page="common/head.jsp?title=Cliente"/>
@@ -55,5 +50,6 @@
                 </div>
             </div>
         </c:if>
+        <jsp:include page="common/footer.jsp"/>
     </body>
 </html>

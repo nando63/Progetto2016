@@ -1,10 +1,5 @@
-<%-- 
-    Document   : descrizione
-    Created on : 23-apr-2016, 16.48.55
-    Author     : Nando
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -39,7 +34,7 @@
                         <c:forEach var="auto" items="${listAuto}">
                             <c:if test="${auto.getIdCategoria().equals(categoria.getId())}">
                                 <c:if test="${auto.getIdCarburante().equals(carburante.getId())}">
-                                    <li>${auto.getMarca()} ${auto.getModello()}</li>
+                                    <li>${auto.getMarca()}&nbsp;${auto.getModello()}</li>
                                 </c:if>
                             </c:if>
                         </c:forEach>
@@ -166,5 +161,6 @@
             </ol>
             -->
         </div>
+        <jsp:include page="common/footer.jsp"/>
     </body>
 </html>

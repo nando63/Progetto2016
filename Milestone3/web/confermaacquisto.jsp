@@ -1,11 +1,6 @@
-<%-- 
-    Document   : confermaacquisto.jsp
-    Created on : 30-apr-2016, 18.55.36
-    Author     : Nando
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
 <!DOCTYPE html>
 <html>
     <jsp:include page="common/head.jsp?title=Cliente"/>
@@ -32,5 +27,6 @@
                 </div>
             </div>
         </c:if>
+        <jsp:include page="common/footer.jsp"/>
     </body>
 </html>

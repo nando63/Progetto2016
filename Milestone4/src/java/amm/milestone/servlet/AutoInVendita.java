@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package amm.milestone3.servlet;
+package amm.milestone.servlet;
 
-import amm.milestone3.Auto;
-import amm.milestone3.Carburante;
-import amm.milestone3.CarburanteFactory;
-import amm.milestone3.CategoriaAuto;
-import amm.milestone3.CategoriaAutoFactory;
-import amm.milestone3.Sessione;
-import amm.milestone3.Venditore;
+import amm.milestone.Auto;
+import amm.milestone.Carburante;
+import amm.milestone.CarburanteFactory;
+import amm.milestone.CategoriaAuto;
+import amm.milestone.CategoriaAutoFactory;
+import amm.milestone.Sessione;
+import amm.milestone.Venditore;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;

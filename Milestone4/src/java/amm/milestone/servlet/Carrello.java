@@ -3,28 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package amm.milestone3.servlet;
+package amm.milestone.servlet;
 
-import amm.milestone3.Cliente;
-import amm.milestone3.Venditore;
-import amm.milestone3.ClienteFactory;
-import amm.milestone3.VenditoreFactory;
+import amm.milestone.Auto;
+import amm.milestone.AutoFactory;
+import amm.milestone.Cliente;
+import amm.milestone.Sessione;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Nando
  */
-@WebServlet(name = "Login", urlPatterns = {"/login.html"})
-public class Login extends HttpServlet {
+@WebServlet(name = "Carrello", urlPatterns = {"/carrello.html"})
+public class Carrello extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,41 +35,16 @@ public class Login extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession(true);
-
-        if (request.getParameter("submit") != null) {
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-            
-            List<Cliente> listaClienti = ClienteFactory.getInstance().getClienteList();
-            if (listaClienti != null) {
-                for (Cliente cliente : listaClienti) {
-                    if (cliente.getUsername().equals(username) && cliente.getPassword().equals(password)) {
-                        session.setAttribute("userType", "c");
-                        session.setAttribute("userId", cliente.getId().toString());
-                        request.setAttribute("cliente", cliente);
-                        request.getRequestDispatcher("cliente.html").forward(request, response);
-                        return;
-                    }
-                }
+        String idAuto = request.getParameter("id");
+        if (idAuto != null) {
+            Cliente c = Sessione.getCliente(request);
+            if (c != null) {
+                Auto auto = AutoFactory.getInstance().getAutoById(Integer.parseInt(idAuto));
+                request.setAttribute("auto", auto);
+                request.setAttribute("cliente", c);
             }
-            List<Venditore> listaVenditori = VenditoreFactory.getInstance().getVenditoreList();
-            if (listaVenditori != null) {
-                for (Venditore venditore : listaVenditori) {
-                    if (venditore.getUsername().equals(username) && venditore.getPassword().equals(password)) {
-                        session.setAttribute("userType", "v");
-                        session.setAttribute("userId", venditore.getId());
-                        request.setAttribute("venditore", venditore);
-                        request.getRequestDispatcher("venditore.html").forward(request, response);
-                        return;
-                    }
-                }
-            }
-            String msg = "Username o password non corretta";
-            request.setAttribute("messaggio", msg);
-            request.setAttribute("username", username);
         }
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+        request.getRequestDispatcher("carrello.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

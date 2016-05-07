@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package amm.milestone3;
+package amm.milestone;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,9 +31,6 @@ public class VenditoreFactory {
         venditore1.setCodiceFiscale("FMCRRT76G12B345J");
         venditore1.setUsername("ven1");
         venditore1.setPassword("pwd1");
-        List<Integer> listaAutoVenditore1 = new ArrayList();
-        listaAutoVenditore1.add(1);
-        venditore1.setIdAutoInVendita(listaAutoVenditore1);
         listaVenditori.add(venditore1);
 
         Venditore venditore2 = new Venditore();
@@ -43,9 +40,6 @@ public class VenditoreFactory {
         venditore2.setCodiceFiscale("ZCCLGU74T12H559F");
         venditore2.setUsername("ven2");
         venditore2.setPassword("pwd2");
-        List<Integer> listaAutoVenditore2 = new ArrayList();
-        listaAutoVenditore2.add(2);
-        venditore2.setIdAutoInVendita(listaAutoVenditore2);
         listaVenditori.add(venditore2);
 
         Venditore venditore3 = new Venditore();
@@ -55,9 +49,6 @@ public class VenditoreFactory {
         venditore3.setCodiceFiscale("FRRTZN86R42Y534L");
         venditore3.setUsername("ven3");
         venditore3.setPassword("pwd3");
-        List<Integer> listaAutoVenditore3 = new ArrayList();
-        listaAutoVenditore3.add(3);
-        venditore3.setIdAutoInVendita(listaAutoVenditore3);
         listaVenditori.add(venditore3);
     }
     public List<Venditore> getVenditoreList() {

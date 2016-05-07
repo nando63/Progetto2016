@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package amm.milestone3.servlet;
+package amm.milestone.servlet;
 
-import amm.milestone3.Auto;
-import amm.milestone3.AutoFactory;
-import amm.milestone3.Cliente;
-import amm.milestone3.Sessione;
+import amm.milestone.Auto;
+import amm.milestone.AutoFactory;
+import amm.milestone.Cliente;
+import amm.milestone.Sessione;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,8 +21,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Nando
  */
-@WebServlet(name = "Carrello", urlPatterns = {"/carrello.html"})
-public class Carrello extends HttpServlet {
+@WebServlet(name = "Cliente", urlPatterns = {"/cliente.html"})
+public class ClienteServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,16 +35,13 @@ public class Carrello extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String idAuto = request.getParameter("id");
-        if (idAuto != null) {
-            Cliente c = Sessione.getCliente(request);
-            if (c != null) {
-                Auto auto = AutoFactory.getInstance().getAutoById(Integer.parseInt(idAuto));
-                request.setAttribute("auto", auto);
-                request.setAttribute("cliente", c);
-            }
+        Cliente c = Sessione.getCliente(request);
+        if (c != null) {
+            ArrayList<Auto> listaAuto = AutoFactory.getInstance().getAutoList();
+            request.setAttribute("listAuto", listaAuto);
+            request.setAttribute("cliente", c);
         }
-        request.getRequestDispatcher("carrello.jsp").forward(request, response);
+        request.getRequestDispatcher("cliente.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

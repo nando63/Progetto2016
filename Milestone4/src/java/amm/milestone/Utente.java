@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package amm.milestone3;
+package amm.milestone;
 
 /**
  *
@@ -16,6 +16,7 @@ public abstract class Utente {
     private String codiceFiscale;
     private String username;
     private String password;
+    private Double saldo;
 
     /**
      * @return the id
@@ -99,5 +100,19 @@ public abstract class Utente {
      */
     public void setCodiceFiscale(String codiceFiscale) {
         this.codiceFiscale = codiceFiscale;
+    }
+
+    /**
+     * @return the saldo
+     */
+    public Double getSaldo() {
+        return saldo;
+    }
+
+    /**
+     * @param saldo the saldo to set
+     */
+    public void setSaldo(Double saldo) {
+        this.saldo = saldo;
     }
 }

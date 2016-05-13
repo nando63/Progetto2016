@@ -14,7 +14,14 @@ import java.util.ArrayList;
 public class CategoriaAutoFactory {
     private static CategoriaAutoFactory caf;
     static ArrayList<CategoriaAuto> listaCategoriaAuto = null;
+    private String connectionString;
     
+    public void setConnectionString(String s) {
+        this.connectionString = s;
+    }
+    public String getConnectionString() {
+        return this.connectionString;
+    }
     public static CategoriaAutoFactory getInstance() {
         if (caf == null)
             caf = new CategoriaAutoFactory();

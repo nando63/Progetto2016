@@ -6,7 +6,6 @@
 package amm.milestone;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -15,7 +14,14 @@ import java.util.List;
 public class AutoFactory {
     private static AutoFactory af;
     static ArrayList<Auto> listaAuto = null;
+    private String connectionString;
     
+    public void setConnectionString(String s) {
+        this.connectionString = s;
+    }
+    public String getConnectionString() {
+        return this.connectionString;
+    }
     public static AutoFactory getInstance() {
         if (af == null)
             af = new AutoFactory();

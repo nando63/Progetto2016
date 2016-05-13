@@ -15,7 +15,14 @@ import java.util.List;
 public class VenditoreFactory {
     private static VenditoreFactory vf;
     static List<Venditore> listaVenditori = null;
-
+    private String connectionString;
+    
+    public void setConnectionString(String s) {
+        this.connectionString = s;
+    }
+    public String getConnectionString() {
+        return this.connectionString;
+    }
     public static VenditoreFactory getInstance() {
         if (vf == null)
             vf = new VenditoreFactory();

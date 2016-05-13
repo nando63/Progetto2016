@@ -15,7 +15,14 @@ import java.util.List;
 public class ClienteFactory {
     private static ClienteFactory cf;
     private static ArrayList<Cliente> listaClienti = null;
-
+    private String connectionString;
+    
+    public void setConnectionString(String s) {
+        this.connectionString = s;
+    }
+    public String getConnectionString() {
+        return this.connectionString;
+    }
     public static ClienteFactory getInstance() {
         if (cf == null) {
             cf = new ClienteFactory();

@@ -14,7 +14,14 @@ import java.util.ArrayList;
 public class CarburanteFactory {
     private static CarburanteFactory cf;
     static ArrayList<Carburante> listaCarburante = null;
+    private String connectionString;
     
+    public void setConnectionString(String s) {
+        this.connectionString = s;
+    }
+    public String getConnectionString() {
+        return this.connectionString;
+    }
     public static CarburanteFactory getInstance() {
         if (cf == null)
             cf = new CarburanteFactory();

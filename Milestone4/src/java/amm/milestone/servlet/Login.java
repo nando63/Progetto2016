@@ -5,12 +5,8 @@
  */
 package amm.milestone.servlet;
 
-import amm.milestone.Cliente;
-import amm.milestone.Venditore;
-import amm.milestone.ClienteFactory;
-import amm.milestone.VenditoreFactory;
+import amm.milestone.*;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,8 +22,8 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "Login", urlPatterns = {"/login.html"}, loadOnStartup = 0 )
 public class Login extends HttpServlet {
     private static final String JDBC_DRIVER = "org.apache.derby.jdbc.EmbeddedDriver";
-    private static final String DB_CLEAN_PATH = "../../web/WEB-INF/db/ammdb";
-    private static final String DB_BUILD_PATH = "WEB-INF/db/ammdb";
+    private static final String DB_CLEAN_PATH = "../../web/WEB-INF/db/AMMDB";
+    private static final String DB_BUILD_PATH = "WEB-INF/db/AMMDB";
 
 
     @Override 
@@ -38,7 +34,11 @@ public class Login extends HttpServlet {
         } catch (ClassNotFoundException ex) {
             //Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //ObjectFactory.getInstance().setConnectionString(dbConnection);
+        AutoFactory.getInstance().setConnectionString(dbConnection);
+        ClienteFactory.getInstance().setConnectionString(dbConnection);
+        VenditoreFactory.getInstance().setConnectionString(dbConnection);
+        CarburanteFactory.getInstance().setConnectionString(dbConnection);
+        CategoriaAutoFactory.getInstance().setConnectionString(dbConnection);
     }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

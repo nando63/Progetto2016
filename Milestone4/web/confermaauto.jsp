@@ -17,6 +17,11 @@
                 </div>
                 <div id="riepilogo">
                     <div>riepilogo:</div>
+                    <c:if test="${auto.getImage() != null}">
+                        <div>
+                            <img src="${auto.getImage()}"/>
+                        </div>
+                    </c:if>
                     <div>
                         <label>Marca</label>
                         <input disabled type="text" value="${auto.getMarca()}"/>
@@ -28,6 +33,10 @@
                     <div>
                         <label>Anno immatricolazione</label>
                         <input disabled type="text" value="${auto.getAnnoImmatricolazione()}"/>
+                    </div>
+                    <div>
+                        <label>Targa</label>
+                        <input disabled type="text" value="${auto.getTarga()}"/>
                     </div>
                     <div>
                         <label>Categoria</label>

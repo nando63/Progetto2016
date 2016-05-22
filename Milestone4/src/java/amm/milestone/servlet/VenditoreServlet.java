@@ -5,14 +5,16 @@
  */
 package amm.milestone.servlet;
 
-import amm.milestone.Carburante;
-import amm.milestone.CarburanteFactory;
-import amm.milestone.CategoriaAuto;
-import amm.milestone.CategoriaAutoFactory;
-import amm.milestone.Sessione;
-import amm.milestone.Venditore;
+import amm.milestone.model.Carburante;
+import amm.milestone.factory.CarburanteFactory;
+import amm.milestone.model.CategoriaAuto;
+import amm.milestone.factory.CategoriaAutoFactory;
+import amm.milestone.model.Sessione;
+import amm.milestone.model.Venditore;
 import java.io.IOException;
-import java.util.List;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,14 +42,17 @@ public class VenditoreServlet extends HttpServlet {
         Venditore v = Sessione.getVenditore(request);
         if (v != null) {
             request.setAttribute("venditore", v);
-            List<CategoriaAuto> listaCatAuto = CategoriaAutoFactory.getInstance().getCategoriaAutoList();
-            request.setAttribute("categorieAuto", listaCatAuto);
-            List<Carburante> listaCarburanti = CarburanteFactory.getInstance().getCarburanteList();
-            request.setAttribute("carburanti", listaCarburanti);
+            
+            ArrayList<CategoriaAuto> listCategorieAuto = CategoriaAutoFactory.getInstance().getCategoriaAutoList();
+            ArrayList<Carburante> listCarburanti = CarburanteFactory.getInstance().getCarburanteList();
+            
+            request.setAttribute("categorieAuto", listCategorieAuto);
+            request.setAttribute("carburanti", listCarburanti);
         }
+        else
+            Logger.getLogger("VenditoreServlet").log(Level.INFO, "venditore nullo");
         request.getRequestDispatcher("venditore.jsp").forward(request, response);
     }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

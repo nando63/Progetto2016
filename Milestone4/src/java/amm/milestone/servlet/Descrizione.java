@@ -5,12 +5,12 @@
  */
 package amm.milestone.servlet;
 
-import amm.milestone.Auto;
-import amm.milestone.AutoFactory;
-import amm.milestone.Carburante;
-import amm.milestone.CarburanteFactory;
-import amm.milestone.CategoriaAuto;
-import amm.milestone.CategoriaAutoFactory;
+import amm.milestone.model.Auto;
+import amm.milestone.factory.AutoFactory;
+import amm.milestone.model.Carburante;
+import amm.milestone.factory.CarburanteFactory;
+import amm.milestone.model.CategoriaAuto;
+import amm.milestone.factory.CategoriaAutoFactory;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;

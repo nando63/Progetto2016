@@ -36,7 +36,13 @@
                         </select>
                     </div>
                     <div>
-                        <label for="categoria">Carburante</label>
+                        <label for="carburante">Carburante</label>
+                        <%--
+                        <c:forEach var="carburante" items="${carburanti}">
+                            <label for="carb_${carburante.getId()}">${carburante.getNome()}</label>
+                            <input type="radio" id="carb_${carburante.getId()}" name="carburante" value="${carburante.getId()}"/>
+                        </c:forEach>
+                        --%>
                         <select name="carburante" id="carburante">
                             <c:forEach var="carburante" items="${carburanti}">
                                 <option value="${carburante.getId()}" <c:if test="${carburante.getId() == auto.getIdCarburante()}">selected</c:if>>${carburante.getNome()}</option>
@@ -46,6 +52,14 @@
                     <div>
                         <label for="anno">Anno immatricolazione</label>
                         <input type="number" id="anno" name="anno" value="${auto.getAnnoImmatricolazione()}"/>
+                    </div>
+                    <div>
+                        <label for="targa">Targa</label>
+                        <input type="text" id="targa" name="targa" value="${auto.getTarga()}"/>
+                    </div>
+                    <div>
+                        <label for="image">Immagine</label>
+                        <input type="text" id="image" name="image" value="${auto.getImage()}"/>
                     </div>
                     <div>
                         <label for="descrizione">Descrizione</label>

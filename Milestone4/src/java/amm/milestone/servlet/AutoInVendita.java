@@ -5,13 +5,14 @@
  */
 package amm.milestone.servlet;
 
-import amm.milestone.Auto;
-import amm.milestone.Carburante;
-import amm.milestone.CarburanteFactory;
-import amm.milestone.CategoriaAuto;
-import amm.milestone.CategoriaAutoFactory;
-import amm.milestone.Sessione;
-import amm.milestone.Venditore;
+import amm.milestone.factory.AutoFactory;
+import amm.milestone.model.Auto;
+import amm.milestone.model.Carburante;
+import amm.milestone.factory.CarburanteFactory;
+import amm.milestone.model.CategoriaAuto;
+import amm.milestone.factory.CategoriaAutoFactory;
+import amm.milestone.model.Sessione;
+import amm.milestone.model.Venditore;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -52,7 +53,9 @@ public class AutoInVendita extends HttpServlet {
             String anno = request.getParameter("anno");
             if (anno != null && anno.length() > 0)
                 auto.setAnnoImmatricolazione(Integer.parseInt(anno));
-            
+            auto.setImage(request.getParameter("image"));
+            auto.setIdProprietario(v.getId());
+
             request.setAttribute("venditore", v);
             request.setAttribute("auto", auto);
             if (marca.length() == 0 || modello.length() == 0) {
@@ -71,6 +74,8 @@ public class AutoInVendita extends HttpServlet {
                 request.getRequestDispatcher("venditore.jsp").forward(request, response);
                 return;
             }
+            else
+                AutoFactory.getInstance().insertAuto(auto);
         }
         request.getRequestDispatcher("confermaauto.jsp").forward(request, response);
     }

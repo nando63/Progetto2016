@@ -11,8 +11,8 @@ INSERT INTO UTENTE(ID,NOME,COGNOME,CODFISC,USERNAME,PASSWORD,SALDO)
         (4,'Roberto','Formica','FMCRRT76G12B345J','ven1','pwd1',0),
         (5,'Pier Luigi','Zucca','ZCCLGU74T12H559F','ven2','pwd2',0),
         (6,'Tiziano','Ferro','FRRTZN86R42Y534L','ven3','pwd3',0);
-INSERT INTO CLIENTE(ID,UTENTE_ID) VALUES(default,1),(default,2),(default,3);
-INSERT INTO VENDITORE(ID,UTENTE_ID) VALUES(1,4),(2,5),(3,6);
+INSERT INTO CLIENTE(UTENTE_ID) VALUES(1),(2),(3);
+INSERT INTO VENDITORE(UTENTE_ID) VALUES(4),(5),(6);
 INSERT INTO CATEGORIA(ID,CATEGORIA,DESCRIZIONE)
     VALUES(1,'Citycar','Un tempo una specialità del tutto italiana e una tipologia di vettura prevalentemente diffusa in Italia, le superutilitarie iniziano a diffondersi globalmente verso gli anni ottanta e novanta fino a essere presenti in quasi tutto il mondo e nei listini di quasi tutte le maggiori case automobilistiche. La vettura racchiude concetti strettamente legati alle esigenze delle città, ovvero ridotte dimensioni e praticità, nonché grande manovrabilità. In Europa le vetture di questo tipo vengono spesso classificate come appartenenti al segmento A, mentre nel mercato nord americano sono quasi del tutto assenti, anche nelle grandi città, salvo esperimenti recenti come la FIAT 500, Smart Fortwo e Mini.'),
         (2,'Berlina','Per berlina si intende la carrozzeria d''autovettura con tetto fisso, generalmente dotata di 4 o 5 porte e principalmente realizzata nelle configurazioni a due, tre o due volumi e mezzo. Il termine berlina indicava, in origine, un particolare tipo di carrozza.'),

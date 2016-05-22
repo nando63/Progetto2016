@@ -5,10 +5,10 @@
  */
 package amm.milestone.servlet;
 
-import amm.milestone.Auto;
-import amm.milestone.AutoFactory;
-import amm.milestone.Cliente;
-import amm.milestone.Sessione;
+import amm.milestone.model.Auto;
+import amm.milestone.factory.AutoFactory;
+import amm.milestone.model.Cliente;
+import amm.milestone.model.Sessione;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;

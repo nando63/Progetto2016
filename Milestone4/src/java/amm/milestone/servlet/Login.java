@@ -5,8 +5,13 @@
  */
 package amm.milestone.servlet;
 
-import amm.milestone.*;
+import amm.milestone.factory.*;
+import amm.milestone.model.Carburante;
+import amm.milestone.model.CategoriaAuto;
+import amm.milestone.model.Cliente;
+import amm.milestone.model.Venditore;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -62,8 +67,7 @@ public class Login extends HttpServlet {
                 for (Cliente cliente : listaClienti) {
                     if (cliente.getUsername().equals(username) && cliente.getPassword().equals(password)) {
                         session.setAttribute("userType", "c");
-                        session.setAttribute("userId", cliente.getId().toString());
-                        request.setAttribute("cliente", cliente);
+                        session.setAttribute("userId", cliente.getId());
                         request.getRequestDispatcher("cliente.html").forward(request, response);
                         return;
                     }
@@ -75,7 +79,6 @@ public class Login extends HttpServlet {
                     if (venditore.getUsername().equals(username) && venditore.getPassword().equals(password)) {
                         session.setAttribute("userType", "v");
                         session.setAttribute("userId", venditore.getId());
-                        request.setAttribute("venditore", venditore);
                         request.getRequestDispatcher("venditore.html").forward(request, response);
                         return;
                     }

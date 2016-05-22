@@ -6,7 +6,7 @@
     <jsp:include page="common/head.jsp?title=Cliente"/>
     <body>
         <jsp:include page="common/header.jsp?page=cliente"/>
-        <h1>La tua vetrina</h1>
+        <h1>La vetrina</h1>
         <c:if test="${cliente == null}">
             <span>Accesso non autorizzato</span>
         </c:if>
@@ -26,25 +26,25 @@
                     </tr>
                     <c:set var="i" value="1"/>
                     <c:forEach var="auto" items="${listAuto}">
-                        <c:if test="${auto.getImage() != null}">
-                            <c:if test="${i == 1}">
-                                <c:set var="riga" value="rigadispari"/>
-                            </c:if>
-                            <c:if test="${i == 0}">
-                                <c:set var="riga" value="rigapari"/>
-                            </c:if>
-                            <c:set var="i" value="${1 - i}"/>
-                            <tr class="${riga}">
-                                <td class="modello">${auto.getMarca()}&nbsp;${auto.getModello()}</td>
-                                <td>
-                                    <img width="100" src="${auto.getImage()}" alt="${auto.getMarca()} ${auto.getModello()}" title="${auto.getMarca()} ${auto.getModello()}"/>
-                                </td>
-                                <td class="center">${auto.getAnnoImmatricolazione()}</td>
-                                <td>${auto.getDescrizione()}</td>
-                                <td class="center">€ ${auto.getPrezzo()}</td>
-                                <td class="aggiungi"><a href="carrello.html?id=${auto.getId()}">Aggiungi al carrello</a></td>
-                            </tr>
+                        <c:if test="${i == 1}">
+                            <c:set var="riga" value="rigadispari"/>
                         </c:if>
+                        <c:if test="${i == 0}">
+                            <c:set var="riga" value="rigapari"/>
+                        </c:if>
+                        <c:set var="i" value="${1 - i}"/>
+                        <tr class="${riga}">
+                            <td class="modello">${auto.getMarca()}&nbsp;${auto.getModello()}</td>
+                            <td>
+                                <c:if test="${auto.getImage() != null}">
+                                    <img width="100" src="${auto.getImage()}" alt="${auto.getMarca()}&nbsp;${auto.getModello()}" title="${auto.getMarca()} ${auto.getModello()}"/>
+                                </c:if>
+                            </td>
+                            <td class="center">${auto.getAnnoImmatricolazione()}</td>
+                            <td>${auto.getDescrizione()}</td>
+                            <td class="center">€ ${auto.getPrezzo()}</td>
+                            <td class="aggiungi"><a href="carrello.html?id=${auto.getId()}">Aggiungi al carrello</a></td>
+                        </tr>
                     </c:forEach>
                 </table>
             </div>

@@ -5,10 +5,10 @@
  */
 package amm.milestone.servlet;
 
-import amm.milestone.model.Auto;
 import amm.milestone.factory.AutoFactory;
-import amm.milestone.model.Cliente;
+import amm.milestone.model.Auto;
 import amm.milestone.model.Sessione;
+import amm.milestone.model.Venditore;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
@@ -21,8 +21,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Nando
  */
-@WebServlet(name = "Cliente", urlPatterns = {"/cliente.html"})
-public class ClienteServlet extends HttpServlet {
+@WebServlet(name = "ListaAutoVenditore", urlPatterns = {"/listaautovenditore.html"})
+public class ListaAutoVenditore extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,13 +35,13 @@ public class ClienteServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Cliente c = Sessione.getCliente(request);
-        if (c != null) {
-            ArrayList<Auto> listaAuto = AutoFactory.getInstance().getAutoInVendita();
+        Venditore v = Sessione.getVenditore(request);
+        if (v != null) {
+            ArrayList<Auto> listaAuto = AutoFactory.getInstance().getAutoProprietario(v.getId());
             request.setAttribute("listAuto", listaAuto);
-            request.setAttribute("cliente", c);
+            request.setAttribute("venditore", v);
         }
-        request.getRequestDispatcher("cliente.jsp").forward(request, response);
+        request.getRequestDispatcher("listaautovenditore.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

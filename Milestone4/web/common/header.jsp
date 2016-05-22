@@ -31,7 +31,7 @@
             <c:if test="${param.page.equals('venditore')}">
                 <li class="checked">
                     <c:if test="${param.set != null}">
-                        <a href="venditore.html">Venditore</a>
+                        <a href="listaautovenditore.html">Venditore</a>
                     </c:if>
                     <c:if test="${param.set == null}">
                         <span>Venditore</span>
@@ -39,7 +39,7 @@
                 </li>
             </c:if>
             <c:if test="${!param.page.equals('venditore')}">
-                 <li><a href="venditore.html">Venditore</a></li>
+                 <li><a href="listaautovenditore.html">Venditore</a></li>
             </c:if>
             <%--
             <c:choose>

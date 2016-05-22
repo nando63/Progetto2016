@@ -79,7 +79,7 @@ public class Login extends HttpServlet {
                     if (venditore.getUsername().equals(username) && venditore.getPassword().equals(password)) {
                         session.setAttribute("userType", "v");
                         session.setAttribute("userId", venditore.getId());
-                        request.getRequestDispatcher("venditore.html").forward(request, response);
+                        request.getRequestDispatcher("listaautovenditore.html").forward(request, response);
                         return;
                     }
                 }

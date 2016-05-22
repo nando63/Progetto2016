@@ -9,7 +9,7 @@
         <h1>Login</h1>
         <c:if test="${messaggio != null}">
             <div class="errore">
-                <span>(${messaggio})</span>
+                <span>${messaggio}</span>
             </div>
         </c:if>
         <form method="post" action="login.html">

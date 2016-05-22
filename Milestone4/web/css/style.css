@@ -108,6 +108,11 @@ label {
     width: 11em;
     float: left;
 }
+label.radio {
+    width:auto;
+    float: none;
+    font-size: 80%;
+}
 div.submit {
     text-align: center;
     margin-top: 10px;
@@ -143,7 +148,16 @@ td.aggiungi {
     width: 10em;
     text-align: center;
 }
-
+tr#aggiungiauto {
+    height: 40px;
+    text-align: center;
+}
+td.modifica, td.elimina {
+    padding: 0 20px;
+}
+div#nessunaauto {
+    text-align: center;
+}
 div#indice strong {
     margin: 25px;
     display: block;
@@ -206,6 +220,7 @@ footer {
     border-top: 1px solid black;
     position:fixed;
     bottom:0;
+    margin-left:-10px;
 }
 @media only screen and (max-width: 1023px) {
     div#indice {

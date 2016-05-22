@@ -328,4 +328,65 @@ public class AutoFactory {
         */
         return null;
     }
+
+    public ArrayList<Auto> getAutoProprietario(Integer id) {
+        ArrayList<Auto> listaAuto = new ArrayList<>();
+        try {
+            Connection conn = DriverManager.getConnection(connectionString, "pippo", "pippo");
+            String sql = "select * from AUTO where proprietario_id=?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            ResultSet set = stmt.executeQuery();
+            while (set.next()) {
+                Auto auto = new Auto();
+                auto.setId(set.getInt("id"));
+                auto.setIdCategoria(set.getInt("Categoria_id"));
+                auto.setMarca(set.getString("marca"));
+                auto.setModello(set.getString("modello"));
+                auto.setAnnoImmatricolazione(set.getInt("anno_immatricolazione"));
+                auto.setTarga(set.getString("targa"));
+                auto.setIdCarburante(set.getInt("Carburante_id"));
+                auto.setDescrizione(set.getString("descrizione"));
+                auto.setPrezzo(set.getInt("prezzo"));
+                auto.setImage(set.getString("image"));
+                auto.setIdProprietario(set.getInt("Proprietario_id"));
+                listaAuto.add(auto);
+            }
+            stmt.close();
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AutoFactory.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listaAuto;
+    }
+
+    public ArrayList<Auto> getAutoInVendita() {
+        ArrayList<Auto> listaAuto = new ArrayList<>();
+        try {
+            Connection conn = DriverManager.getConnection(connectionString, "pippo", "pippo");
+            String sql = "select * from AUTO where proprietario_id > 0";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet set = stmt.executeQuery();
+            while (set.next()) {
+                Auto auto = new Auto();
+                auto.setId(set.getInt("id"));
+                auto.setIdCategoria(set.getInt("Categoria_id"));
+                auto.setMarca(set.getString("marca"));
+                auto.setModello(set.getString("modello"));
+                auto.setAnnoImmatricolazione(set.getInt("anno_immatricolazione"));
+                auto.setTarga(set.getString("targa"));
+                auto.setIdCarburante(set.getInt("Carburante_id"));
+                auto.setDescrizione(set.getString("descrizione"));
+                auto.setPrezzo(set.getInt("prezzo"));
+                auto.setImage(set.getString("image"));
+                auto.setIdProprietario(set.getInt("Proprietario_id"));
+                listaAuto.add(auto);
+            }
+            stmt.close();
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AutoFactory.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listaAuto;
+    }
 }

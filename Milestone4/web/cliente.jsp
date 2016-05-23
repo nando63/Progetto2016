@@ -37,7 +37,7 @@
                             <td class="modello">${auto.getMarca()}&nbsp;${auto.getModello()}</td>
                             <td>
                                 <c:if test="${auto.getImage() != null}">
-                                    <img width="100" src="${auto.getImage()}" alt="${auto.getMarca()}&nbsp;${auto.getModello()}" title="${auto.getMarca()} ${auto.getModello()}"/>
+                                    <img width="100" src="${auto.getImage()}" alt="${auto.getMarca()}&nbsp;${auto.getModello()}" title="${auto.getMarca()}&nbsp;${auto.getModello()}"/>
                                 </c:if>
                             </td>
                             <td class="center">${auto.getAnnoImmatricolazione()}</td>

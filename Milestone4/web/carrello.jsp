@@ -15,9 +15,11 @@
             <br/>
             <span>saldo: € ${cliente.getSaldo()}</span>
             <div id="carrello">
-                <div class="immagine">
-                    <img src="${auto.getImage()}"/>
-                </div>
+                <c:if test="${auto.getImage() != null}">
+                    <div class="immagine">
+                        <img src="${auto.getImage()}" alt="${auto.getMarca()}&nbsp;${auto.getModello()}" title="${auto.getMarca()}&nbsp;${auto.getModello()}"/>
+                    </div>
+                </c:if>
                 <div>
                     <label>Marca</label><input disabled type="text" value="${auto.getMarca()}"/>
                 </div>

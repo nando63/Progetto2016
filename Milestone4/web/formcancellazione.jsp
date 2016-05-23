@@ -16,7 +16,7 @@
             <span>saldo: € ${venditore.getSaldo()}</span>
             <div id="carrello">
                 <div class="immagine">
-                    <img src="${auto.getImage()}"/>
+                    <img src="${auto.getImage()}" alt="${auto.getMarca()}&nbsp;${auto.getModello()}" title="${auto.getMarca()}&nbsp;${auto.getModello()}"/>
                 </div>
                 <div>
                     <label>Marca</label><input disabled type="text" value="${auto.getMarca()}"/>

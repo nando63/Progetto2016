@@ -19,10 +19,10 @@
                 <div>
                     <c:if test="${nuovosaldo >= 0}">
                         ${cliente.setSaldo(nuovosaldo)} <!-- messo solo per prova -->
-                        <span>Complimenti, hai appena acquistato una ${auto.getMarca()} ${auto.getModello()}</span>
+                        <span>Complimenti, hai appena acquistato una ${auto.getMarca()}&nbsp;${auto.getModello()}</span>
                     </c:if>
                     <c:if test="${nuovosaldo < 0}">
-                        <span>Peccato, non hai abbastanza soldi per comprarti una ${auto.getMarca()} ${auto.getModello()}</span>
+                        <span>Peccato, non hai abbastanza soldi per comprarti una ${auto.getMarca()}&nbsp;${auto.getModello()}</span>
                     </c:if>
                 </div>
             </div>

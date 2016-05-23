@@ -7,8 +7,8 @@ package amm.milestone.servlet;
 
 import amm.milestone.model.Auto;
 import amm.milestone.factory.AutoFactory;
-import amm.milestone.model.Cliente;
 import amm.milestone.model.Sessione;
+import amm.milestone.model.Venditore;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,8 +20,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Nando
  */
-@WebServlet(name = "Carrello", urlPatterns = {"/carrello.html"})
-public class Carrello extends HttpServlet {
+@WebServlet(name = "FormCancellazione", urlPatterns = {"/formcancellazione.html"})
+public class FormCancellazione extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,14 +36,14 @@ public class Carrello extends HttpServlet {
             throws ServletException, IOException {
         String idAuto = request.getParameter("id");
         if (idAuto != null) {
-            Cliente c = Sessione.getCliente(request);
-            if (c != null) {
+            Venditore v = Sessione.getVenditore(request);
+            if (v != null) {
                 Auto auto = AutoFactory.getInstance().getAutoById(Integer.parseInt(idAuto));
                 request.setAttribute("auto", auto);
-                request.setAttribute("cliente", c);
+                request.setAttribute("venditore", v);
             }
         }
-        request.getRequestDispatcher("carrello.jsp").forward(request, response);
+        request.getRequestDispatcher("formcancellazione.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

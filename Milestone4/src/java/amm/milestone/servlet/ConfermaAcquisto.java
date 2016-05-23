@@ -10,7 +10,9 @@ import amm.milestone.factory.AutoFactory;
 import amm.milestone.model.Cliente;
 import amm.milestone.model.Sessione;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -42,6 +44,13 @@ public class ConfermaAcquisto extends HttpServlet {
                 Auto auto = AutoFactory.getInstance().getAutoById(Integer.parseInt(idAuto));
                 request.setAttribute("auto", auto);
                 request.setAttribute("cliente", c);
+                if (c.getSaldo() >= auto.getPrezzo()) {
+                    if (!AutoFactory.getInstance().vendiAuto(auto,c)) {
+                        Logger.getLogger(AutoFactory.class.getName()).log(Level.SEVERE, c.getNome());
+                        request.getRequestDispatcher("cliente.html").forward(request, response);
+                        return;
+                    }
+                }
             }
         }
         request.getRequestDispatcher("confermaacquisto.jsp").forward(request, response);

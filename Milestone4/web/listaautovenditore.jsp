@@ -52,8 +52,8 @@
                                 <td class="center">${auto.getAnnoImmatricolazione()}</td>
                                 <td>${auto.getDescrizione()}</td>
                                 <td class="center">€ ${auto.getPrezzo()}</td>
-                                <td class="modifica"><a href="modifica.html?id=${auto.getId()}"><img alt="modifica" title="modifica" src="images/modify.png"/></a></td>
-                                <td class="elimina"><a href="elimina.html?id=${auto.getId()}"><img alt="elimina" title="elimina" src="images/delete.png"/></a></td>
+                                <td class="modifica"><a href="formmodifica.html?id=${auto.getId()}"><img alt="modifica" title="modifica" src="images/modify.png"/></a></td>
+                                <td class="elimina"><a href="formcancellazione.html?id=${auto.getId()}"><img alt="elimina" title="elimina" src="images/delete.png"/></a></td>
                             </tr>
                         </c:forEach>
                         <tr id="aggiungiauto"><td colspan="7"><a href="venditore.html">Aggiungi auto</a></td></tr>

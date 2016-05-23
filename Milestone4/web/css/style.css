@@ -222,6 +222,13 @@ footer {
     bottom:0;
     margin-left:-10px;
 }
+.modifica img:hover, .elimina img:hover {
+    padding: 2px;
+    border: 1px solid #ef7000;
+}
+.modifica img, .elimina img {
+    padding: 3px;
+}
 @media only screen and (max-width: 1023px) {
     div#indice {
         float: none;

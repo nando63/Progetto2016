@@ -7,9 +7,14 @@ package amm.milestone.servlet;
 
 import amm.milestone.model.Auto;
 import amm.milestone.factory.AutoFactory;
-import amm.milestone.model.Cliente;
+import amm.milestone.factory.CarburanteFactory;
+import amm.milestone.factory.CategoriaAutoFactory;
+import amm.milestone.model.Carburante;
+import amm.milestone.model.CategoriaAuto;
 import amm.milestone.model.Sessione;
+import amm.milestone.model.Venditore;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,8 +25,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Nando
  */
-@WebServlet(name = "Carrello", urlPatterns = {"/carrello.html"})
-public class Carrello extends HttpServlet {
+@WebServlet(name = "FormModifica", urlPatterns = {"/formmodifica.html"})
+public class FormModifica extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,14 +41,23 @@ public class Carrello extends HttpServlet {
             throws ServletException, IOException {
         String idAuto = request.getParameter("id");
         if (idAuto != null) {
-            Cliente c = Sessione.getCliente(request);
-            if (c != null) {
+            Venditore v = Sessione.getVenditore(request);
+            if (v != null) {
                 Auto auto = AutoFactory.getInstance().getAutoById(Integer.parseInt(idAuto));
                 request.setAttribute("auto", auto);
-                request.setAttribute("cliente", c);
+                List<CategoriaAuto> listaCatAuto = CategoriaAutoFactory.getInstance().getCategoriaAutoList();
+                request.setAttribute("categorieAuto", listaCatAuto);
+                List<Carburante> listaCarburanti = CarburanteFactory.getInstance().getCarburanteList();
+                request.setAttribute("carburanti", listaCarburanti);
+                request.setAttribute("venditore", v);
+            }
+            else {
+                request.setAttribute("messaggio", "Sessione scaduta");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+                return;
             }
         }
-        request.getRequestDispatcher("carrello.jsp").forward(request, response);
+        request.getRequestDispatcher("formmodifica.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

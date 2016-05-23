@@ -6,6 +6,7 @@
 package amm.milestone.factory;
 
 import amm.milestone.model.Auto;
+import amm.milestone.model.Cliente;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -223,7 +224,7 @@ public class AutoFactory {
         int status = 0;
         try {
             Connection conn = DriverManager.getConnection(connectionString, "pippo", "pippo");
-            String sql = "delete AUTO where ID=?";
+            String sql = "delete from AUTO where ID=?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, id);
             status = stmt.executeUpdate();
@@ -242,18 +243,19 @@ public class AutoFactory {
                     "ANNO_IMMATRICOLAZIONE=?,TARGA=?,DESCRIZIONE=?,PREZZO=?,IMAGE=?,PROPRIETARIO_ID=? "+
                     "where ID=?";
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setInt(11, auto.getId());
             stmt.setString(1, auto.getMarca());
             stmt.setString(2, auto.getModello());
             stmt.setInt(3, auto.getIdCategoria());
             stmt.setInt(4, auto.getIdCarburante());
             stmt.setInt(5, auto.getAnnoImmatricolazione());
             stmt.setString(6, auto.getTarga());
-            stmt.setInt(7, auto.getPrezzo());
-            stmt.setString(8, auto.getDescrizione());
+            stmt.setString(7, auto.getDescrizione());
+            stmt.setInt(8, auto.getPrezzo());
             stmt.setString(9, auto.getImage());
             stmt.setInt(10, auto.getIdProprietario());
+            stmt.setInt(11, auto.getId());
             status = stmt.executeUpdate();
+            Logger.getLogger(AutoFactory.class.getName()).log(Level.SEVERE, "status=" + status +";id="+ auto.getId());
             stmt.close();
             conn.close();
         } catch (SQLException ex) {
@@ -364,7 +366,7 @@ public class AutoFactory {
         ArrayList<Auto> listaAuto = new ArrayList<>();
         try {
             Connection conn = DriverManager.getConnection(connectionString, "pippo", "pippo");
-            String sql = "select * from AUTO where proprietario_id > 0";
+            String sql = "select a.* from AUTO a, VENDITORE v where a.proprietario_id = v.utente_id";
             PreparedStatement stmt = conn.prepareStatement(sql);
             ResultSet set = stmt.executeQuery();
             while (set.next()) {
@@ -388,5 +390,70 @@ public class AutoFactory {
             Logger.getLogger(AutoFactory.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listaAuto;
+    }
+
+    public boolean vendiAuto(Auto auto, Cliente cliente) {
+        Connection conn = null;
+        Boolean error = false;
+        try {
+            conn = DriverManager.getConnection(connectionString, "pippo", "pippo");
+            conn.setAutoCommit(false);
+            String sql = null;
+            PreparedStatement stmt=null;
+
+            // aumenta il saldo del venditore
+            sql = "Update UTENTE set saldo=saldo+? where id=?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, auto.getPrezzo());
+            stmt.setInt(2, auto.getIdProprietario());
+            error = (stmt.executeUpdate() != 1);
+            stmt.close();
+
+            Logger.getLogger(AutoFactory.class.getName()).log(Level.INFO, sql+"-"+auto.getPrezzo()+"-"+auto.getIdProprietario()+"-"+error);
+            
+            if (!error) {
+                // diminuisce il saldo del cliente
+                sql = "Update UTENTE set saldo=saldo-? where id=?";
+                stmt = conn.prepareStatement(sql);
+                stmt.setInt(1, auto.getPrezzo());
+                stmt.setInt(2, cliente.getId());
+                error = (stmt.executeUpdate() != 1);
+                stmt.close();
+                Logger.getLogger(AutoFactory.class.getName()).log(Level.INFO, sql+"-"+auto.getPrezzo()+"-"+cliente.getId()+"-"+error);
+            }
+
+            if (!error) {
+                // imposta l'auto al nuovo proprietario
+                sql = "Update AUTO set proprietario_id=? where id=?";
+                stmt = conn.prepareStatement(sql);
+                stmt.setInt(1, cliente.getId());
+                stmt.setInt(2, auto.getId());
+                error = (stmt.executeUpdate() != 1);
+                stmt.close();
+                Logger.getLogger(AutoFactory.class.getName()).log(Level.INFO, sql+"-"+cliente.getId()+"-"+auto.getId()+"-"+error);
+            }
+            if (!error) {
+                cliente.setSaldo(cliente.getSaldo()-auto.getPrezzo());
+            }
+        } catch (SQLException ex) {
+            error = true;
+            Logger.getLogger(AutoFactory.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally {
+            if (conn != null) {
+                try {
+                    if (error)
+                        conn.rollback();
+                    else
+                        conn.commit();
+                    conn.setAutoCommit(true);
+                    conn.close();
+                }
+                catch(SQLException ex) {
+                    Logger.getLogger(AutoFactory.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return error;
     }
 }

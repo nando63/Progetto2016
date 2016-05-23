@@ -5,11 +5,15 @@
  */
 package amm.milestone.servlet;
 
-import amm.milestone.model.Auto;
 import amm.milestone.factory.AutoFactory;
+import amm.milestone.model.Auto;
 import amm.milestone.model.Cliente;
 import amm.milestone.model.Sessione;
+import amm.milestone.model.Venditore;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,8 +24,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Nando
  */
-@WebServlet(name = "Carrello", urlPatterns = {"/carrello.html"})
-public class Carrello extends HttpServlet {
+@WebServlet(name = "Elimina", urlPatterns = {"/elimina.html"})
+public class Elimina extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,16 +38,17 @@ public class Carrello extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String idAuto = request.getParameter("id");
+        String idAuto = request.getParameter("idauto");
+        Logger.getLogger(Elimina.class.getName()).log(Level.INFO, idAuto);
         if (idAuto != null) {
-            Cliente c = Sessione.getCliente(request);
-            if (c != null) {
-                Auto auto = AutoFactory.getInstance().getAutoById(Integer.parseInt(idAuto));
-                request.setAttribute("auto", auto);
-                request.setAttribute("cliente", c);
+            Venditore v = Sessione.getVenditore(request);
+            Logger.getLogger(Elimina.class.getName()).log(Level.INFO, v.getCognome());
+            if (v != null) {
+                int r = AutoFactory.getInstance().deleteAuto(Integer.parseInt(idAuto));
+                request.setAttribute("venditore", v);
             }
         }
-        request.getRequestDispatcher("carrello.jsp").forward(request, response);
+        request.getRequestDispatcher("listaautovenditore.html").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

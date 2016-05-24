@@ -120,4 +120,31 @@ public class VenditoreFactory {
             Logger.getLogger("VenditoreServlet").log(Level.INFO, "Venditore non trovato: id = "+id);
         return venditore;
     }
+
+    public Venditore getVenditoreAuth(String username, String password) {
+        Venditore venditore = null;
+        try {
+            Connection conn = DriverManager.getConnection(connectionString, "pippo", "pippo");
+            String sql = "select u.* from UTENTE u, VENDITORE v where u.username=? and u.password=? and u.id=v.utente_id";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+            ResultSet set = stmt.executeQuery();
+            while (set.next()) {
+                venditore = new Venditore();
+                venditore.setId(set.getInt("ID"));
+                venditore.setCodiceFiscale(set.getString("CODFISC"));
+                venditore.setCognome(set.getString("COGNOME"));
+                venditore.setNome(set.getString("NOME"));
+                venditore.setPassword(set.getString("PASSWORD"));
+                venditore.setUsername(set.getString("USERNAME"));
+                venditore.setSaldo(set.getDouble("SALDO"));
+            }
+            stmt.close();
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AutoFactory.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return venditore;
+    }
 }

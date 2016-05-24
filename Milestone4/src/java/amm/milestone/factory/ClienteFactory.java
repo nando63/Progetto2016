@@ -123,4 +123,31 @@ public class ClienteFactory {
         }
         return cliente;
     }
+
+    public Cliente getClienteAuth(String username, String password) {
+        Cliente cliente = null;
+        try {
+            Connection conn = DriverManager.getConnection(connectionString, "pippo", "pippo");
+            String sql = "select u.* from UTENTE u, CLIENTE c where u.username=? and u.password=? and u.id=c.utente_id";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+            ResultSet set = stmt.executeQuery();
+            while (set.next()) {
+                cliente = new Cliente();
+                cliente.setId(set.getInt("ID"));
+                cliente.setCodiceFiscale(set.getString("CODFISC"));
+                cliente.setCognome(set.getString("COGNOME"));
+                cliente.setNome(set.getString("NOME"));
+                cliente.setPassword(set.getString("PASSWORD"));
+                cliente.setUsername(set.getString("USERNAME"));
+                cliente.setSaldo(set.getDouble("SALDO"));
+            }
+            stmt.close();
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AutoFactory.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return cliente;
+    }
 }

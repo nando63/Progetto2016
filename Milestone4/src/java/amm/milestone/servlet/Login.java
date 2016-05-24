@@ -6,12 +6,9 @@
 package amm.milestone.servlet;
 
 import amm.milestone.factory.*;
-import amm.milestone.model.Carburante;
-import amm.milestone.model.CategoriaAuto;
 import amm.milestone.model.Cliente;
 import amm.milestone.model.Venditore;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -62,27 +59,19 @@ public class Login extends HttpServlet {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             
-            List<Cliente> listaClienti = ClienteFactory.getInstance().getClienteList();
-            if (listaClienti != null) {
-                for (Cliente cliente : listaClienti) {
-                    if (cliente.getUsername().equals(username) && cliente.getPassword().equals(password)) {
-                        session.setAttribute("userType", "c");
-                        session.setAttribute("userId", cliente.getId());
-                        request.getRequestDispatcher("cliente.html").forward(request, response);
-                        return;
-                    }
-                }
+            Cliente c = ClienteFactory.getInstance().getClienteAuth(username,password);
+            if (c != null) {
+                session.setAttribute("userType", "c");
+                session.setAttribute("userId", c.getId());
+                request.getRequestDispatcher("cliente.html").forward(request, response);
+                return;
             }
-            List<Venditore> listaVenditori = VenditoreFactory.getInstance().getVenditoreList();
-            if (listaVenditori != null) {
-                for (Venditore venditore : listaVenditori) {
-                    if (venditore.getUsername().equals(username) && venditore.getPassword().equals(password)) {
-                        session.setAttribute("userType", "v");
-                        session.setAttribute("userId", venditore.getId());
-                        request.getRequestDispatcher("listaautovenditore.html").forward(request, response);
-                        return;
-                    }
-                }
+            Venditore v = VenditoreFactory.getInstance().getVenditoreAuth(username,password);
+            if (v != null) {
+                session.setAttribute("userType", "v");
+                session.setAttribute("userId", v.getId());
+                request.getRequestDispatcher("listaautovenditore.html").forward(request, response);
+                return;
             }
             String msg = "Username o password non corretta";
             request.setAttribute("messaggio", msg);

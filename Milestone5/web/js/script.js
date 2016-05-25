@@ -11,6 +11,7 @@ function filtra() {
         contentType: 'application/json',
         success : function(result) {
             alert('Result:'+result);
+            console.log(result);
         },
         error : function(exception, textStatus){
             alert('Exeption:'+exception);

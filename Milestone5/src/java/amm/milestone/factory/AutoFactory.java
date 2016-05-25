@@ -458,12 +458,17 @@ public class AutoFactory {
     }
 
     public ArrayList<Auto> filtra(String q) {
+        //return getAutoInVendita();
+        
         ArrayList<Auto> listaAuto = new ArrayList<>();
         try {
             Connection conn = DriverManager.getConnection(connectionString, "pippo", "pippo");
             String sql = "select a.* from AUTO a, VENDITORE v where a.proprietario_id = v.utente_id and "+
-                    "(a.marca like '%?%' or a.modello like '%?%' or a.descrizione like '%?%')";
+                    "(lower(a.marca) like '%?%' or lower(a.modello) like '%?%' or lower(a.descrizione) like '%?%')";
             PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, q.toLowerCase());
+            stmt.setString(2, q.toLowerCase());
+            stmt.setString(3, q.toLowerCase());
             ResultSet set = stmt.executeQuery();
             while (set.next()) {
                 Auto auto = new Auto();
@@ -486,5 +491,6 @@ public class AutoFactory {
             Logger.getLogger(AutoFactory.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listaAuto;
+        
     }
 }

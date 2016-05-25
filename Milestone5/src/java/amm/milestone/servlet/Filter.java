@@ -10,7 +10,12 @@ import amm.milestone.model.Auto;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.json.Json;
+import javax.json.JsonArray;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,12 +45,28 @@ public class Filter extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             String q = request.getParameter("q");
             ArrayList<Auto> listaAuto = AutoFactory.getInstance().filtra(q);
-            JsonObjectBuilder retVal = Json.createObjectBuilder();
-            listaAuto.stream().forEach(auto -> retVal.add(
-                    "marca", auto.getMarca()
-            ));
-            
-            out.print(retVal);
+            Logger.getLogger(Filter.class.getName()).log(Level.INFO, listaAuto.toString());
+
+            JsonArrayBuilder jsonArray = Json.createArrayBuilder();
+            for (Auto auto : listaAuto) {
+                JsonObjectBuilder jsonObj = Json.createObjectBuilder();
+                jsonObj.add("id",auto.getId());
+                jsonObj.add("marca",auto.getMarca());
+                jsonObj.add("modello",auto.getModello());
+                jsonObj.add("carburante_id",auto.getIdCarburante());
+                jsonObj.add("categoria_id",auto.getIdCategoria());
+                jsonObj.add("proprietario_id",auto.getIdProprietario());
+                jsonObj.add("descrizione",auto.getDescrizione());
+                jsonObj.add("targa",auto.getTarga());
+                String image = auto.getImage();
+                if (image != null)
+                    jsonObj.add("image",image);
+                jsonObj.add("prezzo",auto.getPrezzo());
+                jsonObj.add("anno_immatricolazione",auto.getAnnoImmatricolazione());
+                jsonArray.add(jsonObj);
+            }
+            JsonArray value = jsonArray.build();
+            out.write(value.toString());
         }
     }
 

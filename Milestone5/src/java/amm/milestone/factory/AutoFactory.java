@@ -456,4 +456,35 @@ public class AutoFactory {
         }
         return error;
     }
+
+    public ArrayList<Auto> filtra(String q) {
+        ArrayList<Auto> listaAuto = new ArrayList<>();
+        try {
+            Connection conn = DriverManager.getConnection(connectionString, "pippo", "pippo");
+            String sql = "select a.* from AUTO a, VENDITORE v where a.proprietario_id = v.utente_id and "+
+                    "(a.marca like '%?%' or a.modello like '%?%' or a.descrizione like '%?%')";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet set = stmt.executeQuery();
+            while (set.next()) {
+                Auto auto = new Auto();
+                auto.setId(set.getInt("id"));
+                auto.setIdCategoria(set.getInt("Categoria_id"));
+                auto.setMarca(set.getString("marca"));
+                auto.setModello(set.getString("modello"));
+                auto.setAnnoImmatricolazione(set.getInt("anno_immatricolazione"));
+                auto.setTarga(set.getString("targa"));
+                auto.setIdCarburante(set.getInt("Carburante_id"));
+                auto.setDescrizione(set.getString("descrizione"));
+                auto.setPrezzo(set.getInt("prezzo"));
+                auto.setImage(set.getString("image"));
+                auto.setIdProprietario(set.getInt("Proprietario_id"));
+                listaAuto.add(auto);
+            }
+            stmt.close();
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AutoFactory.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listaAuto;
+    }
 }

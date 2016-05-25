@@ -210,6 +210,14 @@ div#carrello img {
 div#riepilogo {
     margin-top: 10px;
 }
+div#sezione_filtro {
+    margin: 0 auto;
+    display: table;
+}
+div#sezione_filtro #filtro {
+    margin-right: 10px;
+    width: 20em;
+}
 footer {
     width: 100%;
     text-align: center;

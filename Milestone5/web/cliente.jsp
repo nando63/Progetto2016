@@ -15,6 +15,10 @@
                 <span>Cliente: ${cliente.getNome()}</span>
                 <br/>
                 <span>saldo: € ${cliente.getSaldo()}</span>
+                <div id="sezione_filtro">
+                    <input type="text" id="filtro"/>
+                    <button onclick="filtra();">Filtra</button>
+                </div>
                 <table>
                     <tr class="intestazione">
                         <th>Marca e modello</th>

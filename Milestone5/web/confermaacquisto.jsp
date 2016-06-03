@@ -14,7 +14,7 @@
             <span>Cliente: ${cliente.getNome()}</span>
             <br/>
             <c:set var="nuovosaldo" value="${cliente.getSaldo() - auto.getPrezzo()}"/>
-            <span>saldo: € ${cliente.getSaldo()}</span>
+            <span>saldo: € ${cliente.getSaldo().intValue()}</span>
             <div id="confermaacquisto">
                 <div>
                     <c:if test="${nuovosaldo >= 0}">

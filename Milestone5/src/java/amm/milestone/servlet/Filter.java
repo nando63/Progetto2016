@@ -7,6 +7,8 @@ package amm.milestone.servlet;
 
 import amm.milestone.factory.AutoFactory;
 import amm.milestone.model.Auto;
+import amm.milestone.model.Cliente;
+import amm.milestone.model.Sessione;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -15,7 +17,6 @@ import java.util.logging.Logger;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
-import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -42,31 +43,45 @@ public class Filter extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("application/json");
-        try (PrintWriter out = response.getWriter()) {
+        response.setHeader("Expires", "Sat, 6 May 1995 12:00:00 GMT");
+        response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
+        Cliente c = Sessione.getCliente(request);
+        if (c != null) {
             String q = request.getParameter("q");
-            ArrayList<Auto> listaAuto = AutoFactory.getInstance().filtra(q);
-            Logger.getLogger(Filter.class.getName()).log(Level.INFO, listaAuto.toString());
+            ArrayList<Auto> listaAuto = AutoFactory.getInstance().filtraAutoInVendita(q);
+            request.setAttribute("listaAuto", listaAuto);
+            request.getRequestDispatcher("listaautojson.jsp").forward(request, response);
+            /*
+            try (PrintWriter out = response.getWriter()) {
+                String q = request.getParameter("q");
+                ArrayList<Auto> listaAuto = AutoFactory.getInstance().filtraAutoInVendita(q);
+                Logger.getLogger(Filter.class.getName()).log(Level.INFO, listaAuto.toString());
 
-            JsonArrayBuilder jsonArray = Json.createArrayBuilder();
-            for (Auto auto : listaAuto) {
-                JsonObjectBuilder jsonObj = Json.createObjectBuilder();
-                jsonObj.add("id",auto.getId());
-                jsonObj.add("marca",auto.getMarca());
-                jsonObj.add("modello",auto.getModello());
-                jsonObj.add("carburante_id",auto.getIdCarburante());
-                jsonObj.add("categoria_id",auto.getIdCategoria());
-                jsonObj.add("proprietario_id",auto.getIdProprietario());
-                jsonObj.add("descrizione",auto.getDescrizione());
-                jsonObj.add("targa",auto.getTarga());
-                String image = auto.getImage();
-                if (image != null)
-                    jsonObj.add("image",image);
-                jsonObj.add("prezzo",auto.getPrezzo());
-                jsonObj.add("anno_immatricolazione",auto.getAnnoImmatricolazione());
-                jsonArray.add(jsonObj);
+                JsonArrayBuilder jsonArray = Json.createArrayBuilder();
+                for (Auto auto : listaAuto) {
+                    JsonObjectBuilder jsonObj = Json.createObjectBuilder();
+                    jsonObj.add("id",auto.getId());
+                    jsonObj.add("marca",auto.getMarca());
+                    jsonObj.add("modello",auto.getModello());
+                    jsonObj.add("carburante_id",auto.getIdCarburante());
+                    jsonObj.add("categoria_id",auto.getIdCategoria());
+                    jsonObj.add("proprietario_id",auto.getIdProprietario());
+                    jsonObj.add("descrizione",auto.getDescrizione());
+                    jsonObj.add("targa",auto.getTarga());
+                    String image = auto.getImage();
+                    if (image != null)
+                        jsonObj.add("image",image);
+                    jsonObj.add("prezzo",auto.getPrezzo());
+                    jsonObj.add("anno_immatricolazione",auto.getAnnoImmatricolazione());
+                    jsonArray.add(jsonObj);
+                }
+                JsonArray value = jsonArray.build();
+                out.write(value.toString());
             }
-            JsonArray value = jsonArray.build();
-            out.write(value.toString());
+            */
+        }
+        else {
+            // non fa nulla
         }
     }
 

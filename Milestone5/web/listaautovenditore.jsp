@@ -14,7 +14,7 @@
             <div id="tabclient">
                 <span>Venditore: ${venditore.getNome()}</span>
                 <br/>
-                <span>saldo: € ${venditore.getSaldo()}</span>
+                <span>saldo: € ${venditore.getSaldo().intValue()}</span>
                 <c:if test="${listAuto.size() == 0}">
                     <div id="nessunaauto">
                         <span>Non hai nessuna auto in vendita</span>

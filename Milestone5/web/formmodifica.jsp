@@ -19,7 +19,7 @@
             <div>
                 <span>Venditore: ${venditore.getNome()}</span>
                 <br/>
-                <span>saldo: € ${venditore.getSaldo()}</span>
+                <span>saldo: € ${venditore.getSaldo().intValue()}</span>
                 <form method="post" action="modifica.html">
                     <input type="hidden" name="id" value="${auto.getId()}"/>
                     <div>

@@ -363,33 +363,7 @@ public class AutoFactory {
     }
 
     public ArrayList<Auto> getAutoInVendita() {
-        ArrayList<Auto> listaAuto = new ArrayList<>();
-        try {
-            Connection conn = DriverManager.getConnection(connectionString, "pippo", "pippo");
-            String sql = "select a.* from AUTO a, VENDITORE v where a.proprietario_id = v.utente_id";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            ResultSet set = stmt.executeQuery();
-            while (set.next()) {
-                Auto auto = new Auto();
-                auto.setId(set.getInt("id"));
-                auto.setIdCategoria(set.getInt("Categoria_id"));
-                auto.setMarca(set.getString("marca"));
-                auto.setModello(set.getString("modello"));
-                auto.setAnnoImmatricolazione(set.getInt("anno_immatricolazione"));
-                auto.setTarga(set.getString("targa"));
-                auto.setIdCarburante(set.getInt("Carburante_id"));
-                auto.setDescrizione(set.getString("descrizione"));
-                auto.setPrezzo(set.getInt("prezzo"));
-                auto.setImage(set.getString("image"));
-                auto.setIdProprietario(set.getInt("Proprietario_id"));
-                listaAuto.add(auto);
-            }
-            stmt.close();
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(AutoFactory.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return listaAuto;
+        return filtraAutoInVendita(null);
     }
 
     public boolean vendiAuto(Auto auto, Cliente cliente) {
@@ -457,18 +431,20 @@ public class AutoFactory {
         return error;
     }
 
-    public ArrayList<Auto> filtra(String q) {
-        //return getAutoInVendita();
-        
+    public ArrayList<Auto> filtraAutoInVendita(String q) {
         ArrayList<Auto> listaAuto = new ArrayList<>();
         try {
             Connection conn = DriverManager.getConnection(connectionString, "pippo", "pippo");
-            String sql = "select a.* from AUTO a, VENDITORE v where a.proprietario_id = v.utente_id and "+
-                    "(lower(a.marca) like '%?%' or lower(a.modello) like '%?%' or lower(a.descrizione) like '%?%')";
+            String sql = "select a.* from AUTO a, VENDITORE v where a.proprietario_id = v.utente_id";
+            if (q != null && !q.equals(""))
+                sql += " and (lower(a.marca) like ? or lower(a.modello) like ? or lower(a.descrizione) like ?)";
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, q.toLowerCase());
-            stmt.setString(2, q.toLowerCase());
-            stmt.setString(3, q.toLowerCase());
+            if (q != null && !q.equals("")) {
+                q = "%"+q.toLowerCase()+"%";
+                stmt.setString(1, q);
+                stmt.setString(2, q);
+                stmt.setString(3, q);
+            }
             ResultSet set = stmt.executeQuery();
             while (set.next()) {
                 Auto auto = new Auto();

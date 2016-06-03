@@ -13,7 +13,7 @@
         <c:if test="${venditore != null}">
             <span>Venditore: ${venditore.getNome()}</span>
             <br/>
-            <span>saldo: € ${venditore.getSaldo()}</span>
+            <span>saldo: € ${venditore.getSaldo().intValue()}</span>
             <div id="carrello">
                 <div class="immagine">
                     <img src="${auto.getImage()}" alt="${auto.getMarca()}&nbsp;${auto.getModello()}" title="${auto.getMarca()}&nbsp;${auto.getModello()}"/>

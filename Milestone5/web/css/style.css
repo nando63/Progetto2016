@@ -85,6 +85,10 @@ input[type="text"],input[type="password"],input[type="number"],textarea,select {
     border-left: 1px solid green;
     border-bottom: 1px solid white;
     border-right: 1px solid white;
+    width: 280px;
+}
+textarea {
+    width: 276px;
 }
 input[type="submit"] {
     text-shadow: 2px 2px gray;
@@ -112,6 +116,10 @@ label.radio {
     width:auto;
     float: none;
     font-size: 80%;
+}
+label#labelfiltro {
+    width: auto;
+    margin-right: 10px;
 }
 div.submit {
     text-align: center;
@@ -274,5 +282,8 @@ footer {
         padding: 5px 0;
         border: none;
         background-color: #ddd;
+    }
+    label {
+        width:100%;
     }
 }

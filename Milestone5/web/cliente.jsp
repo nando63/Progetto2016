@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
     <jsp:include page="common/head.jsp?title=Cliente"/>
-    <body>
+    <body onload="caricaElenco()">
         <jsp:include page="common/header.jsp?page=cliente"/>
         <h1>La vetrina</h1>
         <c:if test="${cliente == null}">
@@ -14,12 +14,13 @@
             <div id="tabclient">
                 <span>Cliente: ${cliente.getNome()}</span>
                 <br/>
-                <span>saldo: € ${cliente.getSaldo()}</span>
+                <span>saldo: € ${cliente.getSaldo().intValue()}</span>
                 <div id="sezione_filtro">
-                    <input type="text" id="filtro"/>
-                    <button onclick="filtra();">Filtra</button>
+                    <label for="filtro" id="labelfiltro">Filtra</label>
+                    <input type="text" id="filtro" onkeyup="caricaElencoFiltrato();"/>
                 </div>
-                <table>
+                <table id="listaAuto">
+                    <%--
                     <tr class="intestazione">
                         <th>Marca e modello</th>
                         <th>Immagine</th>
@@ -50,6 +51,7 @@
                             <td class="aggiungi"><a href="carrello.html?id=${auto.getId()}">Aggiungi al carrello</a></td>
                         </tr>
                     </c:forEach>
+                    --%>
                 </table>
             </div>
         </c:if>

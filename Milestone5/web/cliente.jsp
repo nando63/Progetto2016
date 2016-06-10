@@ -20,6 +20,7 @@
                     <input type="text" id="filtro" onkeyup="caricaElencoFiltrato();"/>
                 </div>
                 <table id="listaAuto">
+                    <tr><td>Attendere: sto caricando i dati delle auto ...</td></tr>
                     <%--
                     <tr class="intestazione">
                         <th>Marca e modello</th>

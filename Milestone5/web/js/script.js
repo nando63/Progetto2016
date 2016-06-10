@@ -86,8 +86,15 @@ function caricaElenco(filtro) {
             }
         },
         error : function(data, stato) {
-            //alert('Exeption:'+data);
-            //alert(stato);
+            var element = $('#listaAuto');
+            if (element != null) {
+                element.empty();
+                var tr = document.createElement("tr");
+                td = document.createElement("td");
+                td.innerHTML = "Si è verificato un errore nel caricamento dei dati";
+                tr.appendChild(td);
+                element.append(tr);
+            }
             console.log(data);
         }
     });

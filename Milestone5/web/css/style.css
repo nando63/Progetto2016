@@ -77,6 +77,12 @@ form {
     margin: 0 auto;
     display: table;
 }
+form#logout {
+    margin:0;
+}
+div#datiuser {
+    float:left;
+}
 form div{
     margin: 5px 0;
 }

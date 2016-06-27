@@ -5,19 +5,12 @@
  */
 package amm.milestone.servlet;
 
-import amm.milestone.factory.AutoFactory;
+import amm.milestone.controller.AutoFactory;
 import amm.milestone.model.Auto;
 import amm.milestone.model.Cliente;
-import amm.milestone.model.Sessione;
+import amm.milestone.controller.Sessione;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.json.Json;
-import javax.json.JsonArray;
-import javax.json.JsonArrayBuilder;
-import javax.json.JsonObjectBuilder;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

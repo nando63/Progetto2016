@@ -5,8 +5,8 @@
  */
 package amm.milestone.model;
 
-import amm.milestone.factory.CategoriaAutoFactory;
-import amm.milestone.factory.CarburanteFactory;
+import amm.milestone.controller.CategoriaAutoFactory;
+import amm.milestone.controller.CarburanteFactory;
 
 /**
  *

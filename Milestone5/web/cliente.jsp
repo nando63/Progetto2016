@@ -12,9 +12,7 @@
         </c:if>
         <c:if test="${cliente != null}">
             <div id="tabclient">
-                <span>Cliente: ${cliente.getNome()}</span>
-                <br/>
-                <span>saldo: € ${cliente.getSaldo().intValue()}</span>
+                <jsp:include page="common/datiuser.jsp"/>
                 <div id="sezione_filtro">
                     <label for="filtro" id="labelfiltro">Filtra</label>
                     <input type="text" id="filtro" onkeyup="caricaElencoFiltrato();"/>
@@ -49,7 +47,7 @@
                             <td class="center">${auto.getAnnoImmatricolazione()}</td>
                             <td>${auto.getDescrizione()}</td>
                             <td class="center">€ ${auto.getPrezzo()}</td>
-                            <td class="aggiungi"><a href="carrello.html?id=${auto.getId()}">Aggiungi al carrello</a></td>
+                            <td class="aggiungi"><a href="cliente.html?id=${auto.getId()}">Aggiungi al carrello</a></td>
                         </tr>
                     </c:forEach>
                     --%>

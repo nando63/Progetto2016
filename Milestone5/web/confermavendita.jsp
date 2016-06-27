@@ -11,6 +11,7 @@
             <span>Accesso non autorizzato</span>
         </c:if>
         <c:if test="${venditore != null}">
+            <jsp:include page="common/datiuser.jsp"/>
             <div id="autoinvendita">
                 <div>
                     <span>La tua auto è stata messa in vendita</span>

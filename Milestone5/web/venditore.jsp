@@ -17,10 +17,8 @@
                 </div>
             </c:if>
             <div>
-                <span>Venditore: ${venditore.getNome()}</span>
-                <br/>
-                <span>saldo: € ${venditore.getSaldo().intValue()}</span>
-                <form method="post" action="venditaauto.html">
+                <jsp:include page="common/datiuser.jsp"/>
+                <form method="post" action="venditore.html">
                     <div>
                         <label for="marca">Marca*</label>
                         <input type="text" id="marca" name="marca" value="${auto.getMarca()}"/>
@@ -35,13 +33,6 @@
                             <label class="radio" for="cat_${categoria.getId()}">${categoria.getCategoria()}</label>
                             <input type="radio" id="cat_${categoria.getId()}" name="categoria" value="${categoria.getId()}" <c:if test="${categoria.getId() == auto.getIdCategoria()}">checked</c:if>/>
                         </c:forEach>
-                        <%--
-                        <select name="categoria" id="categoria">
-                            <c:forEach var="categoria" items="${categorieAuto}">
-                                <option value="${categoria.getId()}" <c:if test="${categoria.getId() == auto.getIdCategoria()}">selected</c:if>>${categoria.getCategoria()}</option>
-                            </c:forEach>
-                        </select>
-                        --%>
                     </div>
                     <div>
                         <label for="carb_${carburanti.get(0).getId()}">Carburante*</label>
@@ -49,13 +40,6 @@
                             <label class="radio" for="carb_${carburante.getId()}">${carburante.getNome()}</label>
                             <input type="radio" id="carb_${carburante.getId()}" name="carburante" value="${carburante.getId()}" <c:if test="${carburante.getId() == auto.getIdCarburante()}">checked</c:if>/>
                         </c:forEach>
-                        <%--
-                        <select name="carburante" id="carburante">
-                            <c:forEach var="carburante" items="${carburanti}">
-                                <option value="${carburante.getId()}" <c:if test="${carburante.getId() == auto.getIdCarburante()}">selected</c:if>>${carburante.getNome()}</option>
-                            </c:forEach>
-                        </select>
-                        --%>
                     </div>
                     <div>
                         <label for="anno">Anno immatricolazione</label>
@@ -79,7 +63,7 @@
                     </div>
                     <span>I campi contrassegnati con * sono obbligatori</span>
                     <div class="submit">
-                        <input type="submit" value="Inserisci"/>
+                        <input type="submit" name="azione" value="Inserisci"/>
                     </div>
                 </form>
             </div>

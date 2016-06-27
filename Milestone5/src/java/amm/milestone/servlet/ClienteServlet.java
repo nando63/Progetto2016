@@ -6,11 +6,14 @@
 package amm.milestone.servlet;
 
 import amm.milestone.model.Auto;
-import amm.milestone.factory.AutoFactory;
+import amm.milestone.controller.AutoFactory;
 import amm.milestone.model.Cliente;
-import amm.milestone.model.Sessione;
+import amm.milestone.controller.Sessione;
+import amm.milestone.controller.Vendita;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,25 +26,47 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "Cliente", urlPatterns = {"/cliente.html"})
 public class ClienteServlet extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Cliente c = Sessione.getCliente(request);
         if (c != null) {
-            ArrayList<Auto> listaAuto = AutoFactory.getInstance().getAutoInVendita();
-            request.setAttribute("listAuto", listaAuto);
             request.setAttribute("cliente", c);
+            String idAuto = request.getParameter("id");
+            if (idAuto != null) { // forse la voglio comprare
+                Auto auto = AutoFactory.getInstance().getAutoById(Integer.parseInt(idAuto));
+                request.setAttribute("auto", auto);
+                request.getRequestDispatcher("carrello.jsp").forward(request, response);
+            }
+            else {
+                idAuto = request.getParameter("idauto");
+                if (idAuto != null) { // la voglio comprare
+                    Auto auto = AutoFactory.getInstance().getAutoById(Integer.parseInt(idAuto));
+                    if (c.getSaldo() >= auto.getPrezzo()) {
+                        if (Vendita.vendi(auto,c)) { // c'e' stato un errore nella vendita
+                            request.setAttribute("messaggio", "Si e' verificato un errore durante la transazione");
+                        }
+                        else {
+                            // e' stato aggiornato il saldo del cliente
+                            request.setAttribute("cliente", c);
+                            request.setAttribute("messaggio", "Complimenti, hai appena acquistato una "+auto.getMarca()+" "+auto.getModello());
+                        }
+                    }
+                    else {
+                        request.setAttribute("messaggio", "Peccato, non hai abbastanza soldi per comprarti una "+auto.getMarca()+" "+auto.getModello());
+                    }
+                    // mostro il messaggio
+                    request.getRequestDispatcher("confermaacquisto.jsp").forward(request, response);
+                }
+                else { // lista auto in vendita
+                    ArrayList<Auto> listaAuto = AutoFactory.getInstance().getAutoInVendita();
+                    request.setAttribute("listAuto", listaAuto);
+                    request.getRequestDispatcher("cliente.jsp").forward(request, response);
+                }
+            }
         }
-        request.getRequestDispatcher("cliente.jsp").forward(request, response);
+        else {
+            request.getRequestDispatcher("nonautorizzato.jsp?tipo=c").forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

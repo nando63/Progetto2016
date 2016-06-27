@@ -17,10 +17,8 @@
                 </div>
             </c:if>
             <div>
-                <span>Venditore: ${venditore.getNome()}</span>
-                <br/>
-                <span>saldo: € ${venditore.getSaldo().intValue()}</span>
-                <form method="post" action="modifica.html">
+                <jsp:include page="common/datiuser.jsp"/>
+                <form method="post" action="venditore.html">
                     <input type="hidden" name="id" value="${auto.getId()}"/>
                     <div>
                         <label for="marca">Marca*</label>
@@ -80,7 +78,7 @@
                     </div>
                     <span>I campi contrassegnati con * sono obbligatori</span>
                     <div class="submit">
-                        <input type="submit" value="Modifica"/>
+                        <input type="submit" name="azione" value="Modifica"/>
                     </div>
                 </form>
             </div>

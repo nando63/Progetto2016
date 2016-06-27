@@ -11,9 +11,7 @@
             <span>Accesso non autorizzato</span>
         </c:if>
         <c:if test="${cliente != null}">
-            <span>Cliente: ${cliente.getNome()}</span>
-            <br/>
-            <span>saldo: € ${cliente.getSaldo().intValue()}</span>
+            <jsp:include page="common/datiuser.jsp"/>
             <div id="carrello">
                 <c:if test="${auto.getImage() != null}">
                     <div class="immagine">
@@ -45,7 +43,7 @@
                     <label>Prezzo</label><input disabled type="text" value="€ ${auto.getPrezzo()}"/>
                 </div>
                 <div>
-                    <form action="confermaacquisto.html" method="post">
+                    <form action="cliente.html" method="post">
                         <input type="hidden" name="idauto" value="${auto.getId()}"/>
                         <input type="submit" value="Conferma acquisto"/>
                     </form>

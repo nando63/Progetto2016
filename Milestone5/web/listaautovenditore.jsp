@@ -12,9 +12,7 @@
         </c:if>
         <c:if test="${venditore != null}">
             <div id="tabclient">
-                <span>Venditore: ${venditore.getNome()}</span>
-                <br/>
-                <span>saldo: € ${venditore.getSaldo().intValue()}</span>
+                <jsp:include page="common/datiuser.jsp"/>
                 <c:if test="${listAuto.size() == 0}">
                     <div id="nessunaauto">
                         <span>Non hai nessuna auto in vendita</span>
@@ -52,11 +50,11 @@
                                 <td class="center">${auto.getAnnoImmatricolazione()}</td>
                                 <td>${auto.getDescrizione()}</td>
                                 <td class="center">€ ${auto.getPrezzo()}</td>
-                                <td class="modifica"><a href="formmodifica.html?id=${auto.getId()}"><img alt="modifica" title="modifica" src="images/modify.png"/></a></td>
-                                <td class="elimina"><a href="formcancellazione.html?id=${auto.getId()}"><img alt="elimina" title="elimina" src="images/delete.png"/></a></td>
+                                <td class="modifica"><a href="venditore.html?mod=${auto.getId()}"><img alt="modifica" title="modifica" src="images/modify.png"/></a></td>
+                                <td class="elimina"><a href="venditore.html?del=${auto.getId()}"><img alt="elimina" title="elimina" src="images/delete.png"/></a></td>
                             </tr>
                         </c:forEach>
-                        <tr id="aggiungiauto"><td colspan="7"><a href="venditore.html">Aggiungi auto</a></td></tr>
+                        <tr id="aggiungiauto"><td colspan="7"><a href="venditore.html?new">Aggiungi auto</a></td></tr>
                     </table>
                 </c:if>
             </div>

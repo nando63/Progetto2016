@@ -11,19 +11,10 @@
             <span>Accesso non autorizzato</span>
         </c:if>
         <c:if test="${cliente != null}">
-            <span>Cliente: ${cliente.getNome()}</span>
-            <br/>
-            <c:set var="nuovosaldo" value="${cliente.getSaldo() - auto.getPrezzo()}"/>
-            <span>saldo: € ${cliente.getSaldo().intValue()}</span>
+            <jsp:include page="common/datiuser.jsp"/>
             <div id="confermaacquisto">
                 <div>
-                    <c:if test="${nuovosaldo >= 0}">
-                        ${cliente.setSaldo(nuovosaldo)} <!-- messo solo per prova -->
-                        <span>Complimenti, hai appena acquistato una ${auto.getMarca()}&nbsp;${auto.getModello()}</span>
-                    </c:if>
-                    <c:if test="${nuovosaldo < 0}">
-                        <span>Peccato, non hai abbastanza soldi per comprarti una ${auto.getMarca()}&nbsp;${auto.getModello()}</span>
-                    </c:if>
+                    <span>${messaggio}</span>
                 </div>
             </div>
         </c:if>

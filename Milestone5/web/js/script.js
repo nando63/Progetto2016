@@ -71,7 +71,7 @@ function caricaElenco(filtro) {
                         tr.appendChild(td);
                         td = document.createElement("td");
                         td.className = "aggiungi";
-                        td.innerHTML = "<a href=\"carrello.html?id="+data[i].id+"\">Aggiungi al carrello</a>";
+                        td.innerHTML = "<a href=\"cliente.html?id="+data[i].id+"\">Aggiungi al carrello</a>";
                         tr.appendChild(td);
                         element.append(tr);
                     }

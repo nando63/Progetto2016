@@ -5,26 +5,21 @@
  */
 package amm.milestone.servlet;
 
-import amm.milestone.model.Auto;
-import amm.milestone.controller.AutoFactory;
-import amm.milestone.model.Carburante;
-import amm.milestone.controller.CarburanteFactory;
-import amm.milestone.model.CategoriaAuto;
-import amm.milestone.controller.CategoriaAutoFactory;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Nando
  */
-@WebServlet(name = "Descrizione", urlPatterns = {"/descrizione.html"})
-public class Descrizione extends HttpServlet {
+@WebServlet(name = "Logout", urlPatterns = {"/logout.html"})
+public class Logout extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,15 +32,10 @@ public class Descrizione extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        ArrayList<CategoriaAuto> listCategorieAuto = CategoriaAutoFactory.getInstance().getCategoriaAutoList();
-        ArrayList<Carburante> listCarburanti = CarburanteFactory.getInstance().getCarburanteList();
-        ArrayList<Auto> listAuto = AutoFactory.getInstance().getAutoList();
         
-        request.setAttribute("listCategorieAuto", listCategorieAuto);
-        request.setAttribute("listCarburanti", listCarburanti);
-        request.setAttribute("listAuto", listAuto);
-        request.getRequestDispatcher("descrizione.jsp").forward(request, response);
+        HttpSession session = request.getSession(false);
+        session.invalidate();
+        request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
